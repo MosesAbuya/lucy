@@ -1,0 +1,169 @@
+:root {
+    --color-ink: #0B0B0A;
+    --color-ivory: #F3EEE4;
+    --color-gold: #B8935A;
+    
+    --font-heading: 'Playfair Display', serif;
+    --font-ui: 'Inter', sans-serif;
+    
+    --transition-slow: 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-base: 0.3s ease;
+}
+
+body {
+    background-color: var(--color-ink);
+    color: var(--color-ivory);
+    font-family: var(--font-ui);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Faint paper grain texture overlay */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+h1 {
+    font-size: clamp(2.5rem, 5vw, 5rem);
+    letter-spacing: -0.02em;
+}
+
+h2 {
+    font-size: clamp(2rem, 3.5vw, 3.5rem);
+}
+
+a {
+    color: var(--color-ivory);
+    text-decoration: none;
+    transition: color var(--transition-base);
+}
+
+a:hover {
+    color: var(--color-gold);
+}
+
+.text-gold {
+    color: var(--color-gold) !important;
+}
+
+.bg-ink {
+    background-color: var(--color-ink) !important;
+}
+
+.bg-ivory {
+    background-color: var(--color-ivory) !important;
+    color: var(--color-ink);
+}
+
+.bg-ivory h1, .bg-ivory h2, .bg-ivory h3, .bg-ivory p, .bg-ivory a {
+    color: var(--color-ink);
+}
+
+/* Hairline dividers instead of boxes */
+.hairline-bottom {
+    border-bottom: 1px solid rgba(184, 147, 90, 0.3);
+}
+
+.hairline-top {
+    border-top: 1px solid rgba(184, 147, 90, 0.3);
+}
+
+.hairline-gold {
+    height: 1px;
+    background: var(--color-gold);
+    width: 100%;
+    opacity: 0.3;
+    margin: 2rem 0;
+}
+
+/* Custom Buttons */
+.btn-gold {
+    display: inline-block;
+    background: transparent;
+    color: var(--color-gold);
+    border: 1px solid var(--color-gold);
+    padding: 1rem 2.5rem;
+    font-family: var(--font-ui);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.85rem;
+    transition: all var(--transition-slow);
+    cursor: pointer;
+}
+
+.btn-gold:hover {
+    background: var(--color-gold);
+    color: var(--color-ink);
+}
+
+.btn-gold-solid {
+    display: inline-block;
+    background: var(--color-gold);
+    color: var(--color-ink);
+    border: 1px solid var(--color-gold);
+    padding: 1rem 2.5rem;
+    font-family: var(--font-ui);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.85rem;
+    transition: all var(--transition-slow);
+    cursor: pointer;
+}
+
+.btn-gold-solid:hover {
+    background: transparent;
+    color: var(--color-gold);
+}
+
+/* Typography elements */
+.pull-quote {
+    font-family: var(--font-heading);
+    font-size: clamp(1.5rem, 2.5vw, 2.5rem);
+    font-style: italic;
+    border-left: 1px solid var(--color-gold);
+    padding-left: 2rem;
+    margin: 3rem 0;
+    line-height: 1.4;
+}
+
+.eyebrow {
+    font-family: var(--font-ui);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-size: 0.8rem;
+    color: var(--color-gold);
+    margin-bottom: 1rem;
+    display: block;
+}
+
+/* Padding utilities */
+.section-padding {
+    padding: 6rem 0;
+}
+
+@media (min-width: 992px) {
+    .section-padding {
+        padding: 10rem 0;
+    }
+}
