@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $extra_css = 'speaking';
 include 'partials/nav.php';
 ?>

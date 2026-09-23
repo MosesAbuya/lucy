@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Shared Header / Nav Partial
 ?>
 <!DOCTYPE html>
@@ -75,7 +75,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top hairline-bottom" style="background-color: var(--color-ink-translucent); backdrop-filter: blur(10px); transition: background-color var(--transition-slow);">
         <div class="container">
             <!-- Removed the slash/thread icon before text as requested -->
-            <a class="navbar-brand" href="index" style="font-family: var(--font-heading); font-size: 1.5rem; letter-spacing: 0.05em; color: var(--color-gold);">
+            <a class="navbar-brand" href="index.php" style="font-family: var(--font-heading); font-size: 1.5rem; letter-spacing: 0.05em; color: var(--color-gold);">
                 Lucy Mworia
             </a>
             
@@ -86,25 +86,25 @@
             <div class="collapse navbar-collapse" id="mainNav">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0" style="font-family: var(--font-ui); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em;">
                     <li class="nav-item">
-                        <a class="nav-link px-3" href="book">The Book</a>
+                        <a class="nav-link px-3" href="book.php">The Book</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link px-3" href="author">The Author</a>
+                        <a class="nav-link px-3" href="author.php">The Author</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link px-3" href="event">The Event</a>
+                        <a class="nav-link px-3" href="event.php">The Event</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link px-3" href="journey">Journey</a>
+                        <a class="nav-link px-3" href="journey.php">Journey</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link px-3" href="gallery">Gallery</a>
+                        <a class="nav-link px-3" href="gallery.php">Gallery</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link px-3" href="contact">Contact</a>
+                        <a class="nav-link px-3" href="contact.php">Contact</a>
                     </li>
                     <li class="nav-item ms-lg-3">
-                        <a class="btn-gold px-4 py-2" href="tickets" style="text-decoration: none;">Tickets</a>
+                        <a class="btn-gold px-4 py-2" href="tickets.php" style="text-decoration: none;">Tickets</a>
                     </li>
                     <li class="nav-item ms-lg-3 d-flex align-items-center mt-3 mt-lg-0">
                         <button id="themeToggleBtn" style="background: none; border: 1px solid var(--color-gold); color: var(--color-gold); padding: 0.4rem 0.6rem; border-radius: 4px; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 34px; height: 34px;" title="Toggle Light/Dark Mode">

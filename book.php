@@ -1,4 +1,4 @@
-<?php include 'partials/nav.php'; ?>
+﻿<?php include 'partials/nav.php'; ?>
 
 <style>
     .book-hero {
@@ -108,7 +108,7 @@
                 </p>
 
                 <div class="d-flex flex-wrap gap-3">
-                    <a href="tickets" class="btn-gold-solid">Order the Book - KES 2,500</a>
+                    <a href="tickets.php" class="btn-gold-solid">Order the Book - KES 2,500</a>
                     <a href="#synopsis" class="btn-gold">Read Synopsis</a>
                 </div>
             </div>

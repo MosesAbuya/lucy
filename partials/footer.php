@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Shared Footer Partial
 ?>
     <style>
@@ -41,25 +41,25 @@
                 <div class="col-lg-2 col-md-6 col-6">
                     <h5 class="eyebrow">Explore</h5>
                     <ul class="list-unstyled" style="font-size: 0.9rem;">
-                        <li class="mb-2"><a href="book" style="color: inherit; opacity: 0.7;">The Book</a></li>
-                        <li class="mb-2"><a href="author" style="color: inherit; opacity: 0.7;">The Author</a></li>
-                        <li class="mb-2"><a href="journey" style="color: inherit; opacity: 0.7;">The Journey</a></li>
-                        <li class="mb-2"><a href="gallery" style="color: inherit; opacity: 0.7;">Gallery</a></li>
-                        <li class="mb-2"><a href="faq" style="color: inherit; opacity: 0.7;">FAQ</a></li>
-                        <li class="mb-2"><a href="pledge" style="color: inherit; opacity: 0.7;">The Pledge</a></li>
-                        <li class="mb-2"><a href="reader-stories" style="color: inherit; opacity: 0.7;">Reader Stories</a></li>
-                        <li class="mb-2"><a href="publisher" style="color: inherit; opacity: 0.7;">The Publisher</a></li>
+                        <li class="mb-2"><a href="book.php" style="color: inherit; opacity: 0.7;">The Book</a></li>
+                        <li class="mb-2"><a href="author.php" style="color: inherit; opacity: 0.7;">The Author</a></li>
+                        <li class="mb-2"><a href="journey.php" style="color: inherit; opacity: 0.7;">The Journey</a></li>
+                        <li class="mb-2"><a href="gallery.php" style="color: inherit; opacity: 0.7;">Gallery</a></li>
+                        <li class="mb-2"><a href="faq.php" style="color: inherit; opacity: 0.7;">FAQ</a></li>
+                        <li class="mb-2"><a href="pledge.php" style="color: inherit; opacity: 0.7;">The Pledge</a></li>
+                        <li class="mb-2"><a href="reader-stories.php" style="color: inherit; opacity: 0.7;">Reader Stories</a></li>
+                        <li class="mb-2"><a href="publisher.php" style="color: inherit; opacity: 0.7;">The Publisher</a></li>
                     </ul>
                 </div>
                 
                 <div class="col-lg-2 col-md-6 col-6">
                     <h5 class="eyebrow">Event & Press</h5>
                     <ul class="list-unstyled" style="font-size: 0.9rem;">
-                        <li class="mb-2"><a href="event" style="color: inherit; opacity: 0.7;">Gala Dinner</a></li>
-                        <li class="mb-2"><a href="tickets" style="color: inherit; opacity: 0.7;">Buy Tickets</a></li>
-                        <li class="mb-2"><a href="virtual-ticket" style="color: inherit; opacity: 0.7;">Virtual Access</a></li>
-                        <li class="mb-2"><a href="speaking" style="color: inherit; opacity: 0.7;">Speaking Booking</a></li>
-                        <li class="mb-2"><a href="press" style="color: inherit; opacity: 0.7;">Press & Media</a></li>
+                        <li class="mb-2"><a href="event.php" style="color: inherit; opacity: 0.7;">Gala Dinner</a></li>
+                        <li class="mb-2"><a href="tickets.php" style="color: inherit; opacity: 0.7;">Buy Tickets</a></li>
+                        <li class="mb-2"><a href="virtual-ticket.php" style="color: inherit; opacity: 0.7;">Virtual Access</a></li>
+                        <li class="mb-2"><a href="speaking.php" style="color: inherit; opacity: 0.7;">Speaking Booking</a></li>
+                        <li class="mb-2"><a href="press.php" style="color: inherit; opacity: 0.7;">Press & Media</a></li>
                     </ul>
                 </div>
 
@@ -88,11 +88,11 @@
                 </div>
                 <div class="col-md-8 text-center text-md-end">
                     <ul class="list-inline mb-0" style="font-size: 0.8rem; opacity: 0.6;">
-                        <li class="list-inline-item"><a href="terms" style="color: inherit; text-decoration: none;">Terms of Service</a></li>
+                        <li class="list-inline-item"><a href="terms.php" style="color: inherit; text-decoration: none;">Terms of Service</a></li>
                         <li class="list-inline-item mx-2">|</li>
-                        <li class="list-inline-item"><a href="privacy" style="color: inherit; text-decoration: none;">Privacy Policy</a></li>
+                        <li class="list-inline-item"><a href="privacy.php" style="color: inherit; text-decoration: none;">Privacy Policy</a></li>
                         <li class="list-inline-item mx-2">|</li>
-                        <li class="list-inline-item"><a href="refund" style="color: inherit; text-decoration: none;">Refund Policy</a></li>
+                        <li class="list-inline-item"><a href="refund.php" style="color: inherit; text-decoration: none;">Refund Policy</a></li>
                     </ul>
                 </div>
             </div>
@@ -125,7 +125,7 @@
     <!-- Sticky CTA Strip -->
     <div class="sticky-cta-strip" id="stickyCta">
         <span class="d-none d-md-inline me-3">Finding Lucy is now available.</span>
-        <a href="tickets" class="btn-gold-solid py-1 px-3" style="font-size: 0.85rem;">Order Now</a>
+        <a href="tickets.php" class="btn-gold-solid py-1 px-3" style="font-size: 0.85rem;">Order Now</a>
     </div>
     
     <!-- Cookie Consent -->

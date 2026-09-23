@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $extra_css = 'pledge';
 include 'partials/nav.php';
 ?>
@@ -172,7 +172,7 @@ include 'partials/nav.php';
                 <div class="d-flex flex-column gap-3">
                     <button class="btn-gold-solid" onclick="sharePledge()"><i class="fas fa-share-alt me-2"></i> Share
                         on WhatsApp</button>
-                    <a href="book" class="btn-gold">Read the Book</a>
+                    <a href="book.php" class="btn-gold">Read the Book</a>
                 </div>
             </div>
 

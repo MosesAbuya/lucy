@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $extra_css = 'order-success';
 include 'partials/nav.php';
 $ref = $_GET['ref'] ?? '';
@@ -37,7 +37,7 @@ $ref = $_GET['ref'] ?? '';
                         We will be in touch shortly after verification. An email has been immediately sent to you with your order number and a link to resubmit your transaction code just in case there was a typo earlier.
                     </p>
                     
-                    <a href="index" class="btn-gold-solid">Return to Home</a>
+                    <a href="index.php" class="btn-gold-solid">Return to Home</a>
                 </div>
             </div>
         </div>

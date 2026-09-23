@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $extra_css = 'kpao';
 include 'partials/nav.php';
 ?>
@@ -133,7 +133,7 @@ include 'partials/nav.php';
         <p class="mx-auto" style="max-width: 600px; opacity: 0.8; font-weight: 300; margin-bottom: 2rem;">
             Building a society that honors its elders takes all of us. If you would like to partner with KPAO, volunteer, or learn more about our upcoming initiatives, we would love to hear from you.
         </p>
-        <a href="contact" class="btn-gold-solid">Contact KPAO</a>
+        <a href="contact.php" class="btn-gold-solid">Contact KPAO</a>
     </div>
 </section>
 

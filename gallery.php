@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once 'admin/config.php';
 $db = getDB();
 $result = $db->query("SELECT * FROM gallery ORDER BY display_order ASC, created_at DESC");

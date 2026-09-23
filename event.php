@@ -1,4 +1,4 @@
-<?php 
+﻿<?php 
 require_once 'admin/config.php';
 $db = getDB();
 
@@ -277,7 +277,7 @@ include 'partials/nav.php';
         </div>
 
         <div class="mt-5">
-            <a href="tickets" class="btn-gold-solid">Reserve Your Seat</a>
+            <a href="tickets.php" class="btn-gold-solid">Reserve Your Seat</a>
         </div>
     </div>
 </section>

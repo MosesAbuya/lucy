@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $extra_css = 'stories';
 include 'partials/nav.php';
 ?>

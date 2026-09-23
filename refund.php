@@ -1,4 +1,4 @@
-<?php include 'partials/nav.php'; ?>
+﻿<?php include 'partials/nav.php'; ?>
 
 <section class="section-padding" style="padding-top: 150px; min-height: 80vh;">
     <div class="container">
