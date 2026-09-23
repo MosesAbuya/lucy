@@ -1,19 +1,34 @@
 <?php
-$message_status = '';
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Basic form handling (mock/local)
-    $name = $_POST['name'] ?? '';
-    $email = $_POST['email'] ?? '';
-    $message = $_POST['message'] ?? '';
+    $data = json_decode(file_get_contents('php://input'), true);
+    if (!$data) $data = $_POST;
+    
+    $name = trim($data['name'] ?? '');
+    $email = trim($data['email'] ?? '');
+    $message = trim($data['message'] ?? '');
+    $subject = trim($data['subject'] ?? 'General Inquiry');
+    $source = trim($data['source'] ?? 'contact');
     
     if(!empty($name) && !empty($email) && !empty($message)) {
-        // In production, configure mail() or PHPMailer here.
-        // mail("info@lucymworia.com", "Contact Form: $name", $message, "From: $email");
+        require_once 'admin/config.php';
+        require_once 'partials/mailer.php';
         
-        $message_status = 'success';
+        $db = getDB();
+        $stmt = $db->prepare("INSERT INTO contact_messages (name, email, subject, message, source) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssss", $name, $email, $subject, $message, $source);
+        $stmt->execute();
+        $stmt->close();
+        
+        $body = "New message from $name ($email):<br><br><strong>Subject:</strong> $subject<br><br>" . nl2br(htmlspecialchars($message));
+        sendMail(ADMIN_EMAIL, "Website: $subject", $body, true, 'New Enquiry');
+        
+        header('Content-Type: application/json');
+        echo json_encode(['success' => true]);
+        exit;
     } else {
-        $message_status = 'error';
+        header('Content-Type: application/json');
+        echo json_encode(['success' => false, 'error' => 'Please fill in all fields.']);
+        exit;
     }
 }
 ?>
@@ -71,28 +86,55 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="row gy-5">
             <div class="col-lg-6">
                 
-                <?php if($message_status === 'success'): ?>
-                    <div class="alert alert-success bg-transparent text-gold border-gold" style="border-color: var(--color-gold); color: var(--color-gold);">
-                        Thank you for reaching out. We will get back to you shortly.
-                    </div>
-                <?php elseif($message_status === 'error'): ?>
-                    <div class="alert alert-danger bg-transparent" style="color: #ff6b6b; border-color: #ff6b6b;">
-                        Please fill in all required fields.
-                    </div>
-                <?php endif; ?>
-
-                <form method="POST" action="contact" class="contact-form pe-lg-5">
+                <form id="contactForm" class="contact-form pe-lg-5" onsubmit="submitContact(event)">
                     <div class="mb-4">
-                        <input type="text" class="form-control" name="name" placeholder="Your Name *" required>
+                        <input type="text" class="form-control" id="contactName" placeholder="Your Name *" required>
                     </div>
                     <div class="mb-4">
-                        <input type="email" class="form-control" name="email" placeholder="Email Address *" required>
+                        <input type="email" class="form-control" id="contactEmail" placeholder="Email Address *" required>
                     </div>
                     <div class="mb-5">
-                        <textarea class="form-control" name="message" rows="4" placeholder="Your Message *" required></textarea>
+                        <textarea class="form-control" id="contactMessage" rows="4" placeholder="Your Message *" required></textarea>
                     </div>
-                    <button type="submit" class="btn-gold">Send Message</button>
+                    <button type="submit" class="btn-gold" id="btnSubmitContact">Send Message</button>
                 </form>
+
+                <script>
+                function submitContact(e) {
+                    e.preventDefault();
+                    const btn = document.getElementById('btnSubmitContact');
+                    btn.disabled = true;
+                    btn.innerText = 'Sending...';
+
+                    const payload = {
+                        name: document.getElementById('contactName').value,
+                        email: document.getElementById('contactEmail').value,
+                        message: document.getElementById('contactMessage').value
+                    };
+
+                    fetch('contact.php', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify(payload)
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        if(data.success) {
+                            showPopup('success', 'Message Sent', 'Thank you for reaching out. We will get back to you shortly.');
+                            document.getElementById('contactForm').reset();
+                        } else {
+                            showPopup('error', 'Error', data.error);
+                        }
+                    })
+                    .catch(err => {
+                        showPopup('error', 'Network Error', 'Please check your connection and try again.');
+                    })
+                    .finally(() => {
+                        btn.disabled = false;
+                        btn.innerText = 'Send Message';
+                    });
+                }
+                </script>
             </div>
             
             <div class="col-lg-5 offset-lg-1">

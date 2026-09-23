@@ -12,3 +12,5 @@ RewriteRule ^ - [L]
 # Otherwise, try adding .php
 RewriteCond %{REQUEST_FILENAME}.php -f
 RewriteRule ^(.*)$ $1.php [L]
+
+ErrorDocument 404 /lucy/404.php

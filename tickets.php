@@ -1,4 +1,15 @@
 <?php 
+require_once 'admin/config.php';
+$db = getDB();
+$settings_res = $db->query("SELECT setting_key, setting_value FROM site_settings");
+$settings = [];
+if ($settings_res) {
+    while ($row = $settings_res->fetch_assoc()) {
+        $settings[$row['setting_key']] = $row['setting_value'];
+    }
+}
+$till_number = $settings['till_number'] ?? '1717582';
+
 $extra_js = 'tickets';
 include 'partials/nav.php'; 
 ?>
@@ -31,7 +42,7 @@ include 'partials/nav.php';
 .progress-fill {
     height: 2px;
     background: var(--color-gold);
-    width: 0%; /* Updates via JS: 33%, 66%, 100% */
+    width: 0%; /* Updates via JS */
     position: absolute;
     top: 50%;
     left: 0;
@@ -136,7 +147,7 @@ include 'partials/nav.php';
 
 <section class="tickets-hero text-center">
     <div class="container">
-        <h1 style="font-family: var(--font-heading); font-size: clamp(3rem, 5vw, 4rem);">Reserve Your Seat</h1>
+        <h1 style="font-family: var(--font-heading); font-size: clamp(3rem, 5vw, 4rem);">Order & Reserve</h1>
     </div>
 </section>
 
@@ -153,33 +164,43 @@ include 'partials/nav.php';
                         <div class="step-dot active" id="dot1"></div>
                         <div class="step-dot" id="dot2"></div>
                         <div class="step-dot" id="dot3"></div>
+                        <div class="step-dot" id="dot4"></div>
                     </div>
                 </div>
 
                 <!-- Step 1: Select Tier -->
                 <div class="form-step active" id="step1">
-                    <h3 class="mb-4 text-center" style="font-weight: 300;">Choose Ticket Tier</h3>
+                    <h3 class="mb-4 text-center" style="font-weight: 300;">Choose Your Item</h3>
                     
                     <div class="row gy-4">
-                        <div class="col-md-6">
-                            <div class="ticket-card" data-tier="standard" data-price="10000" onclick="selectTicket(this)">
-                                <div class="ticket-tier">Standard</div>
-                                <div class="ticket-price">KES 10,000</div>
+                        <div class="col-md-4">
+                            <div class="ticket-card" data-tier="book" data-price="2500" onclick="selectTicket(this)">
+                                <div class="ticket-tier">The Book</div>
+                                <div class="ticket-price">KES 2,500</div>
                                 <ul class="ticket-includes ps-3">
-                                    <li>Entry to the gala event</li>
-                                    <li>Participation in talk & Q&A</li>
-                                    <li>Gala dinner</li>
+                                    <li>A copy of "Finding Lucy"</li>
+                                    <li>Delivery or Pickup</li>
                                 </ul>
                                 <div class="mt-auto text-gold text-uppercase" style="font-size: 0.8rem; letter-spacing: 0.1em;">Select</div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="ticket-card" data-tier="bundle" data-price="13000" onclick="selectTicket(this)">
-                                <div class="ticket-tier">Standard + Book</div>
-                                <div class="ticket-price">KES 13,000</div>
+                        <div class="col-md-4">
+                            <div class="ticket-card" data-tier="ticket" data-price="3500" onclick="selectTicket(this)">
+                                <div class="ticket-tier">Gala Ticket</div>
+                                <div class="ticket-price">KES 3,500</div>
                                 <ul class="ticket-includes ps-3">
                                     <li>Entry to the gala event</li>
-                                    <li>Gala dinner</li>
+                                    <li>Gala dinner & Q&A</li>
+                                </ul>
+                                <div class="mt-auto text-gold text-uppercase" style="font-size: 0.8rem; letter-spacing: 0.1em;">Select</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="ticket-card" data-tier="bundle" data-price="6000" onclick="selectTicket(this)">
+                                <div class="ticket-tier">Book + Ticket</div>
+                                <div class="ticket-price">KES 6,000</div>
+                                <ul class="ticket-includes ps-3">
+                                    <li>Gala entry & dinner</li>
                                     <li class="text-gold">Signed copy of the memoir</li>
                                 </ul>
                                 <div class="mt-auto text-gold text-uppercase" style="font-size: 0.8rem; letter-spacing: 0.1em;">Select</div>
@@ -194,20 +215,20 @@ include 'partials/nav.php';
 
                 <!-- Step 2: Details -->
                 <div class="form-step" id="step2">
-                    <h3 class="mb-4 text-center" style="font-weight: 300;">Guest Details</h3>
+                    <h3 class="mb-4 text-center" style="font-weight: 300;">Your Details</h3>
                     
                     <div class="row gy-4">
                         <div class="col-md-6">
-                            <label class="eyebrow">Full Name</label>
-                            <input type="text" class="form-control checkout-input" id="guestName" placeholder="Enter full name">
+                            <label class="eyebrow">Full Name *</label>
+                            <input type="text" class="form-control checkout-input" id="guestName" placeholder="Enter full name" required>
                         </div>
                         <div class="col-md-6">
-                            <label class="eyebrow">Email Address</label>
-                            <input type="email" class="form-control checkout-input" id="guestEmail" placeholder="For e-ticket delivery">
+                            <label class="eyebrow">Email Address *</label>
+                            <input type="email" class="form-control checkout-input" id="guestEmail" placeholder="For confirmation & e-ticket" required>
                         </div>
                         <div class="col-md-6">
-                            <label class="eyebrow">Phone (M-Pesa Number)</label>
-                            <input type="tel" class="form-control checkout-input" id="guestPhone" placeholder="07XX XXX XXX">
+                            <label class="eyebrow">Phone Number *</label>
+                            <input type="tel" class="form-control checkout-input" id="guestPhone" placeholder="07XX XXX XXX" required>
                         </div>
                         <div class="col-md-6">
                             <label class="eyebrow">Quantity</label>
@@ -218,6 +239,19 @@ include 'partials/nav.php';
                                 <option value="4">4</option>
                                 <option value="5">5</option>
                             </select>
+                        </div>
+                    </div>
+
+                    <div id="deliverySection" style="display: none;" class="mt-4">
+                        <div class="form-check mt-3 mb-2">
+                            <input class="form-check-input" type="checkbox" id="requireDelivery" onchange="updateTotal()">
+                            <label class="form-check-label" for="requireDelivery" style="color: var(--color-gold);">
+                                Deliver within Nairobi (+KES 300)
+                            </label>
+                        </div>
+                        <div class="mt-2" id="deliveryAddressGroup" style="display: none;">
+                            <label class="eyebrow">Delivery Address</label>
+                            <textarea class="form-control checkout-input" id="guestAddress" rows="2" placeholder="Enter full delivery address"></textarea>
                         </div>
                     </div>
 
@@ -239,28 +273,44 @@ include 'partials/nav.php';
                     <div class="text-center">
                         <h3 class="mb-4" style="font-weight: 300;">M-Pesa Payment</h3>
                         
-                        <div id="paymentInitial">
-                            <p style="opacity: 0.8; margin-bottom: 2rem;">
-                                Click below to send an M-Pesa prompt to <strong><span id="displayPhone"></span></strong> for <strong><span id="displayTotal"></span></strong>.
-                            </p>
-                            <button class="btn-gold-solid w-100 mb-3" style="max-width: 300px;" onclick="triggerMpesa()">Pay with M-Pesa</button>
-                            <button class="btn-gold w-100" style="max-width: 300px; border: none;" onclick="prevStep(2)">Back to Details</button>
-                        </div>
-
-                        <div id="paymentPolling" style="display: none; padding: 3rem 0;">
-                            <div class="spinner-border text-gold mb-4" role="status" style="width: 3rem; height: 3rem; color: var(--color-gold);">
-                                <span class="visually-hidden">Loading...</span>
+                        <div style="background: rgba(11,11,10,0.5); border: 1px solid var(--color-gold); padding: 2rem; border-radius: 4px; margin-bottom: 2rem;">
+                            <p style="font-size: 1.2rem; margin-bottom: 1rem;">Pay exactly <strong id="displayTotal" style="color: var(--color-gold); font-size: 1.5rem;"></strong> to:</p>
+                            <div style="font-family: var(--font-heading); font-size: 2.5rem; color: var(--color-gold); letter-spacing: 2px; margin-bottom: 0.5rem;">
+                                Till Number: <?= htmlspecialchars($till_number) ?>
                             </div>
-                            <h4 style="font-weight: 300;">Check your phone</h4>
-                            <p style="opacity: 0.8;">Please enter your M-Pesa PIN to complete the transaction.</p>
+                            <p style="opacity: 0.8; font-family: var(--font-ui); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.1em;">Lucy Mworia</p>
                         </div>
 
-                        <div id="paymentSuccess" style="display: none; padding: 3rem 0;">
-                            <div style="color: var(--color-gold); font-size: 4rem; margin-bottom: 1rem;"><i class="fas fa-check-circle"></i></div>
-                            <h2 style="font-family: var(--font-heading);">Booking Confirmed</h2>
-                            <p style="opacity: 0.8;">Thank you! Your e-ticket has been sent to your email.</p>
-                            <a href="index" class="btn-gold mt-4">Return Home</a>
+                        <div class="text-start mb-4" style="opacity: 0.9; max-width: 400px; margin: 0 auto;">
+                            <ol class="ps-3" style="font-weight: 300; line-height: 1.8;">
+                                <li>Open <strong>M-Pesa</strong> on your phone</li>
+                                <li>Select <strong>Lipa na M-Pesa</strong> → <strong>Buy Goods and Services</strong></li>
+                                <li>Enter Till: <strong><?= htmlspecialchars($till_number) ?></strong></li>
+                                <li>Enter amount and complete payment</li>
+                                <li>Copy the M-Pesa confirmation code below</li>
+                            </ol>
                         </div>
+                        
+                        <div class="text-start" style="max-width: 400px; margin: 0 auto;">
+                            <label class="eyebrow" style="color: var(--color-gold);">Enter M-Pesa Transaction Code *</label>
+                            <input type="text" class="form-control checkout-input mb-4" id="mpesaCode" placeholder="e.g. SFA1234XYZ" style="text-transform: uppercase;">
+                            
+                            <div id="paymentError" class="alert alert-danger" style="display: none; background: transparent; border-color: red; color: red;"></div>
+
+                            <button class="btn-gold-solid w-100 mb-3" id="btnSubmitOrder" onclick="submitOrder()">Confirm My Order</button>
+                            <button class="btn-gold w-100" style="border: none;" onclick="prevStep(2)">Back to Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4: Success -->
+                <div class="form-step" id="step4">
+                    <div class="text-center" style="padding: 3rem 0;">
+                        <div style="color: var(--color-gold); font-size: 4rem; margin-bottom: 1rem;"><i class="fas fa-check-circle"></i></div>
+                        <h2 style="font-family: var(--font-heading);">Order Received</h2>
+                        <p style="opacity: 0.8; font-size: 1.1rem; margin-bottom: 0.5rem;">Your reference: <strong id="successRef" style="color: var(--color-gold);"></strong></p>
+                        <p style="opacity: 0.7; max-width: 500px; margin: 1rem auto 2rem;">We will verify your M-Pesa payment shortly. Once confirmed, you will receive an email with your receipt and further details.</p>
+                        <a href="index" class="btn-gold mt-4">Return Home</a>
                     </div>
                 </div>
 

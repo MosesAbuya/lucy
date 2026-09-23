@@ -1,5 +1,6 @@
 :root {
     --color-ink: #0B0B0A;
+    --color-ink-translucent: rgba(11, 11, 10, 0.95);
     --color-ivory: #F3EEE4;
     --color-gold: #B8935A;
     
@@ -8,6 +9,12 @@
     
     --transition-slow: 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-base: 0.3s ease;
+}
+
+:root.light-mode {
+    --color-ink: #F8F5F0;  /* Soft off-white for light mode background */
+    --color-ivory: #1A1A1A; /* Dark gray for light mode text */
+    --color-ink-translucent: rgba(248, 245, 240, 0.95);
 }
 
 body {
@@ -21,6 +28,18 @@ body {
     line-height: 1.6;
     position: relative;
     overflow-x: hidden;
+    transition: background-color var(--transition-base), color var(--transition-base);
+}
+
+:root.light-mode .navbar-dark .navbar-nav .nav-link {
+    color: rgba(26, 26, 26, 0.7);
+}
+:root.light-mode .navbar-dark .navbar-nav .nav-link:hover,
+:root.light-mode .navbar-dark .navbar-nav .nav-link.active {
+    color: rgba(26, 26, 26, 1);
+}
+:root.light-mode .navbar-dark .navbar-toggler-icon {
+    filter: invert(1);
 }
 
 /* Faint paper grain texture overlay */

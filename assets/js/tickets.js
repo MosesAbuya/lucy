@@ -1,5 +1,5 @@
 /**
- * Tickets Booking Flow Logic
+ * Tickets Booking Flow Logic - Manual Till
  */
 
 let selectedTier = '';
@@ -7,45 +7,71 @@ let selectedPrice = 0;
 let currentStep = 1;
 
 function selectTicket(card) {
-    // Remove selected class from all
     document.querySelectorAll('.ticket-card').forEach(c => c.classList.remove('selected'));
-    
-    // Add to clicked
     card.classList.add('selected');
     
-    // Store values
     selectedTier = card.getAttribute('data-tier');
     selectedPrice = parseInt(card.getAttribute('data-price'));
     
-    // Enable continue button
     document.getElementById('btnStep1').removeAttribute('disabled');
+    
+    // Show delivery option only if book or bundle
+    if (selectedTier === 'book' || selectedTier === 'bundle') {
+        document.getElementById('deliverySection').style.display = 'block';
+    } else {
+        document.getElementById('deliverySection').style.display = 'none';
+        document.getElementById('requireDelivery').checked = false;
+        document.getElementById('deliveryAddressGroup').style.display = 'none';
+    }
     
     updateTotal();
 }
 
+document.getElementById('requireDelivery')?.addEventListener('change', function() {
+    if (this.checked) {
+        document.getElementById('deliveryAddressGroup').style.display = 'block';
+    } else {
+        document.getElementById('deliveryAddressGroup').style.display = 'none';
+    }
+});
+
 function updateTotal() {
     const qty = parseInt(document.getElementById('guestQty').value) || 1;
-    const total = selectedPrice * qty;
+    let total = selectedPrice * qty;
     
-    document.getElementById('totalDisplay').innerText = `KES ${total.toLocaleString()}`;
-    document.getElementById('displayTotal').innerText = `KES ${total.toLocaleString()}`;
+    if (document.getElementById('requireDelivery').checked) {
+        total += 300;
+    }
+    
+    const formatted = `KES ${total.toLocaleString()}`;
+    document.getElementById('totalDisplay').innerText = formatted;
+    document.getElementById('displayTotal').innerText = formatted;
 }
 
 function updateProgress(step) {
     const fill = document.getElementById('progressFill');
-    const dots = [document.getElementById('dot1'), document.getElementById('dot2'), document.getElementById('dot3')];
+    const dots = [
+        document.getElementById('dot1'), 
+        document.getElementById('dot2'), 
+        document.getElementById('dot3'),
+        document.getElementById('dot4')
+    ];
     
-    // Reset all dots
     dots.forEach(dot => dot.classList.remove('active'));
     
     if (step === 1) {
         fill.style.width = '0%';
         dots[0].classList.add('active');
     } else if (step === 2) {
-        fill.style.width = '50%';
+        fill.style.width = '33%';
         dots[0].classList.add('active');
         dots[1].classList.add('active');
     } else if (step === 3) {
+        fill.style.width = '66%';
+        dots[0].classList.add('active');
+        dots[1].classList.add('active');
+        dots[2].classList.add('active');
+    } else if (step === 4) {
         fill.style.width = '100%';
         dots.forEach(dot => dot.classList.add('active'));
     }
@@ -63,17 +89,22 @@ function nextStep(targetStep) {
         if (!selectedTier) return;
         showStep(2);
     } else if (targetStep === 3) {
-        // Basic validation
-        const name = document.getElementById('guestName').value;
-        const email = document.getElementById('guestEmail').value;
-        const phone = document.getElementById('guestPhone').value;
+        const name = document.getElementById('guestName').value.trim();
+        const email = document.getElementById('guestEmail').value.trim();
+        const phone = document.getElementById('guestPhone').value.trim();
+        const requireDelivery = document.getElementById('requireDelivery').checked;
+        const address = document.getElementById('guestAddress').value.trim();
         
         if (!name || !email || !phone) {
-            alert('Please fill in all fields.');
+            showPopup('error', 'Missing Information', 'Please fill in your name, email, and phone.');
             return;
         }
         
-        document.getElementById('displayPhone').innerText = phone;
+        if (requireDelivery && !address) {
+            showPopup('error', 'Missing Information', 'Please enter a delivery address.');
+            return;
+        }
+        
         showStep(3);
     }
 }
@@ -82,21 +113,29 @@ function prevStep(targetStep) {
     showStep(targetStep);
 }
 
-function triggerMpesa() {
-    document.getElementById('paymentInitial').style.display = 'none';
-    document.getElementById('paymentPolling').style.display = 'block';
+function submitOrder() {
+    const mpesaCode = document.getElementById('mpesaCode').value.trim();
+    if (!mpesaCode) {
+        showPopup('error', 'M-Pesa Code Required', 'Please enter your M-Pesa transaction code.');
+        return;
+    }
     
-    // Collect data
+    const btn = document.getElementById('btnSubmitOrder');
+    btn.disabled = true;
+    btn.innerText = 'Processing...';
+    
     const payload = {
-        tier: selectedTier,
-        qty: document.getElementById('guestQty').value,
-        name: document.getElementById('guestName').value,
-        email: document.getElementById('guestEmail').value,
-        phone: document.getElementById('guestPhone').value
+        order_type: selectedTier,
+        full_name: document.getElementById('guestName').value.trim(),
+        email: document.getElementById('guestEmail').value.trim(),
+        phone: document.getElementById('guestPhone').value.trim(),
+        quantity: document.getElementById('guestQty').value,
+        delivery: document.getElementById('requireDelivery').checked ? 1 : 0,
+        delivery_address: document.getElementById('guestAddress').value.trim(),
+        mpesa_code: mpesaCode
     };
 
-    // Simulate API call to our backend (which would call Safaricom)
-    fetch('api/mpesa.php', {
+    fetch('api/order.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -105,18 +144,21 @@ function triggerMpesa() {
     })
     .then(res => res.json())
     .then(data => {
-        // Simulate polling for 5 seconds then success
-        setTimeout(() => {
-            document.getElementById('paymentPolling').style.display = 'none';
-            document.getElementById('paymentSuccess').style.display = 'block';
-        }, 5000);
+        if (data.success) {
+            showPopup('success', 'Order Received', 'Your reference is ' + data.order_ref + '. We will verify your M-Pesa payment shortly.');
+            setTimeout(() => {
+                window.location.href = 'order-success.php?ref=' + data.order_ref;
+            }, 3000);
+        } else {
+            showPopup('error', 'Payment Error', data.error || 'An error occurred. Please try again.');
+            btn.disabled = false;
+            btn.innerText = 'Confirm My Order';
+        }
     })
     .catch(err => {
         console.error(err);
-        // Fallback simulation for local dev without PHP server
-        setTimeout(() => {
-            document.getElementById('paymentPolling').style.display = 'none';
-            document.getElementById('paymentSuccess').style.display = 'block';
-        }, 3000);
+        showPopup('error', 'Network Error', 'Please check your connection and try again.');
+        btn.disabled = false;
+        btn.innerText = 'Confirm My Order';
     });
 }
