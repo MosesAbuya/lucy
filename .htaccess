@@ -1,16 +1,12 @@
+Options +FollowSymLinks -MultiViews
 RewriteEngine On
 RewriteBase /
 
-# If the request is for a valid directory, let it go
-RewriteCond %{REQUEST_FILENAME} -d
-RewriteRule ^ - [L]
+# Serve real files and directories directly
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
 
-# If the request is for a valid file, let it go
-RewriteCond %{REQUEST_FILENAME} -f
-RewriteRule ^ - [L]
-
-# Otherwise, try adding .php extension
-RewriteCond %{REQUEST_FILENAME}.php -f
-RewriteRule ^(.*)$ $1.php [L]
+# If the URL has no extension, internally serve the .php file
+RewriteRule ^([^.]+)$ $1.php [L]
 
 ErrorDocument 404 /404.php
