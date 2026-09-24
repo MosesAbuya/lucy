@@ -144,11 +144,15 @@ function submitOrder() {
     })
     .then(res => res.text())
     .then(text => {
+        console.log('Server response:', text); // Debug: see full response
         let data;
         try {
             data = JSON.parse(text);
         } catch(e) {
-            showPopup('error', 'Server Error', 'The server returned an unexpected response. Please contact support.<br><small style="opacity:0.6">' + text.substring(0, 200) + '</small>');
+            // Escape HTML so it displays as text, not rendered
+            const escaped = text.substring(0, 500)
+                .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+            showPopup('error', 'Server Error', '<pre style="text-align:left;font-size:0.7rem;overflow:auto;max-height:150px;opacity:0.8">' + (escaped || '(empty response)') + '</pre>');
             btn.disabled = false;
             btn.innerText = 'Confirm My Order';
             return;

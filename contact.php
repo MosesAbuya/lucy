@@ -128,11 +128,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     })
                     .then(res => res.text())
                     .then(text => {
+                        console.log('Server response:', text); // Debug
                         let data;
                         try {
                             data = JSON.parse(text);
                         } catch(e) {
-                            showPopup('error', 'Server Error', 'Unexpected server response: ' + text.substring(0, 200));
+                            const escaped = text.substring(0, 500)
+                                .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+                            showPopup('error', 'Server Error', '<pre style="text-align:left;font-size:0.7rem;overflow:auto;max-height:150px;opacity:0.8">' + (escaped || '(empty response)') + '</pre>');
                             return;
                         }
                         if(data.success) {
