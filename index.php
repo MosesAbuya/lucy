@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $extra_css = 'home';
 $extra_js = 'home_interactions';
 include 'partials/nav.php';
@@ -482,6 +482,142 @@ include 'partials/nav.php';
         </div>
     </div>
 </section>
+
+<!-- Lucy Portrait Section -->
+<section class="section-padding lucy-portrait-section">
+    <div class="container">
+        <div class="row align-items-center gy-5">
+            <!-- Portrait Frame -->
+            <div class="col-lg-5 text-center">
+                <div class="lucy-portrait-frame">
+                    <div class="portrait-corner portrait-corner--tl"></div>
+                    <div class="portrait-corner portrait-corner--tr"></div>
+                    <div class="portrait-corner portrait-corner--bl"></div>
+                    <div class="portrait-corner portrait-corner--br"></div>
+                    <div class="portrait-inner">
+                        <img src="assets/images/lucy/lucy closeup.jpeg" alt="Lucy Mworia" class="lucy-portrait-img">
+                    </div>
+                    <div class="portrait-ornament-top">✦ &nbsp; Finding Lucy &nbsp; ✦</div>
+                    <div class="portrait-ornament-bottom">Author &nbsp;·&nbsp; Advocate &nbsp;·&nbsp; Transformation</div>
+                </div>
+            </div>
+            <!-- Text -->
+            <div class="col-lg-6 offset-lg-1">
+                <div class="portrait-eyebrow">The Woman Behind The Book</div>
+                <h2 class="portrait-heading">Meet Lucy Mworia</h2>
+                <p class="portrait-body">Lucy Mworia is a nurse, an author, and a woman who chose herself — after decades of choosing everyone else. Her story is not about the weight she shed, but the life she claimed back: the joy, the identity, the unapologetic sense of self that had quietly slipped away.</p>
+                <p class="portrait-body">Born in Kenya and shaped by two continents, Lucy brings warmth, honesty, and deep wisdom to everything she does — from the boardroom to the ballroom. <em>Finding Lucy</em> is the memoir of that journey, written so other women may recognise themselves in its pages.</p>
+                <div class="mt-5">
+                    <a href="author" class="btn-gold-solid">Discover Her Story</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .lucy-portrait-section {
+        background: radial-gradient(ellipse at 40% 50%, rgba(184,147,90,0.06) 0%, transparent 70%);
+    }
+    .lucy-portrait-frame {
+        position: relative;
+        display: inline-block;
+        padding: 22px;
+        max-width: 400px;
+        width: 100%;
+    }
+    .portrait-inner {
+        position: relative;
+        border: 1px solid rgba(184,147,90,0.5);
+        overflow: hidden;
+        clip-path: polygon(15px 0%, calc(100% - 15px) 0%, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0% calc(100% - 15px), 0% 15px);
+        box-shadow:
+            0 0 0 6px rgba(184,147,90,0.08),
+            0 25px 60px rgba(0,0,0,0.45),
+            inset 0 0 40px rgba(184,147,90,0.04);
+    }
+    .lucy-portrait-img {
+        width: 100%;
+        display: block;
+        transition: transform 0.6s ease;
+        filter: contrast(1.05) brightness(0.97);
+    }
+    .lucy-portrait-frame:hover .lucy-portrait-img {
+        transform: scale(1.03);
+    }
+    /* Corner ornaments */
+    .portrait-corner {
+        position: absolute;
+        width: 28px;
+        height: 28px;
+        border-color: var(--color-gold);
+        border-style: solid;
+        z-index: 2;
+    }
+    .portrait-corner--tl { top: 6px; left: 6px; border-width: 2px 0 0 2px; }
+    .portrait-corner--tr { top: 6px; right: 6px; border-width: 2px 2px 0 0; }
+    .portrait-corner--bl { bottom: 30px; left: 6px; border-width: 0 0 2px 2px; }
+    .portrait-corner--br { bottom: 30px; right: 6px; border-width: 0 2px 2px 0; }
+    /* Ornament text */
+    .portrait-ornament-top {
+        position: absolute;
+        top: 4px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-family: var(--font-ui);
+        font-size: 0.62rem;
+        letter-spacing: 0.2em;
+        color: var(--color-gold);
+        text-transform: uppercase;
+        white-space: nowrap;
+        opacity: 0.85;
+    }
+    .portrait-ornament-bottom {
+        margin-top: 10px;
+        font-family: var(--font-ui);
+        font-size: 0.65rem;
+        letter-spacing: 0.18em;
+        color: var(--color-gold);
+        text-align: center;
+        text-transform: uppercase;
+        opacity: 0.75;
+    }
+    /* Text side */
+    .portrait-eyebrow {
+        font-family: var(--font-ui);
+        font-size: 0.75rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--color-gold);
+        margin-bottom: 1rem;
+    }
+    .portrait-heading {
+        font-family: var(--font-heading);
+        font-size: clamp(2.4rem, 4vw, 3.4rem);
+        line-height: 1.15;
+        margin-bottom: 1.8rem;
+        color: var(--color-ivory);
+    }
+    .portrait-body {
+        font-size: 1.05rem;
+        font-weight: 300;
+        line-height: 1.85;
+        opacity: 0.82;
+        margin-bottom: 1.2rem;
+        color: var(--color-ivory);
+    }
+    /* Light mode adjustments */
+    :root.light-mode .portrait-heading,
+    :root.light-mode .portrait-body {
+        color: var(--color-ink);
+    }
+    :root.light-mode .portrait-inner {
+        box-shadow:
+            0 0 0 6px rgba(184,147,90,0.12),
+            0 20px 50px rgba(0,0,0,0.18),
+            inset 0 0 30px rgba(184,147,90,0.03);
+    }
+</style>
 
 <!-- Section 1: Timeline -->
 <section class="section-padding"
