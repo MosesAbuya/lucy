@@ -1,33 +1,42 @@
-﻿<?php
+<?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $data = json_decode(file_get_contents('php://input'), true);
-    if (!$data) $data = $_POST;
-    
-    $name = trim($data['name'] ?? '');
-    $email = trim($data['email'] ?? '');
-    $message = trim($data['message'] ?? '');
-    $subject = trim($data['subject'] ?? 'General Inquiry');
-    $source = trim($data['source'] ?? 'contact');
-    
-    if(!empty($name) && !empty($email) && !empty($message)) {
-        require_once 'admin/config.php';
-        require_once 'partials/mailer.php';
+    error_reporting(0);
+    try {
+        $data = json_decode(file_get_contents('php://input'), true);
+        if (!$data) $data = $_POST;
         
-        $db = getDB();
-        $stmt = $db->prepare("INSERT INTO contact_messages (name, email, subject, message, source) VALUES (?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssss", $name, $email, $subject, $message, $source);
-        $stmt->execute();
-        $stmt->close();
+        $name = trim($data['name'] ?? '');
+        $email = trim($data['email'] ?? '');
+        $message = trim($data['message'] ?? '');
+        $subject = trim($data['subject'] ?? 'General Inquiry');
+        $source = trim($data['source'] ?? 'contact');
         
-        $body = "New message from $name ($email):<br><br><strong>Subject:</strong> $subject<br><br>" . nl2br(htmlspecialchars($message));
-        sendMail(ADMIN_EMAIL, "Website: $subject", $body, true, 'New Enquiry');
-        
+        if(!empty($name) && !empty($email) && !empty($message)) {
+            require_once 'admin/config.php';
+            require_once 'partials/mailer.php';
+            
+            $db = getDB();
+            $stmt = $db->prepare("INSERT INTO contact_messages (name, email, subject, message, source) VALUES (?, ?, ?, ?, ?)");
+            if (!$stmt) throw new Exception("DB Error: " . $db->error);
+            
+            $stmt->bind_param("sssss", $name, $email, $subject, $message, $source);
+            $stmt->execute();
+            $stmt->close();
+            
+            $body = "New message from $name ($email):<br><br><strong>Subject:</strong> $subject<br><br>" . nl2br(htmlspecialchars($message));
+            sendMail(ADMIN_EMAIL, "Website: $subject", $body, true, 'New Enquiry');
+            
+            header('Content-Type: application/json');
+            echo json_encode(['success' => true]);
+            exit;
+        } else {
+            header('Content-Type: application/json');
+            echo json_encode(['success' => false, 'error' => 'Please fill in all fields.']);
+            exit;
+        }
+    } catch (Throwable $e) {
         header('Content-Type: application/json');
-        echo json_encode(['success' => true]);
-        exit;
-    } else {
-        header('Content-Type: application/json');
-        echo json_encode(['success' => false, 'error' => 'Please fill in all fields.']);
+        echo json_encode(['success' => false, 'error' => 'Server Error: ' . $e->getMessage()]);
         exit;
     }
 }

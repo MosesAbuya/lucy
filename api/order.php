@@ -102,7 +102,7 @@ try {
     $stmt->close();
     $db->close();
 
-} catch (Exception $e) {
+} catch (Throwable $e) {
     echo json_encode(['success' => false, 'error' => 'Server Error: ' . $e->getMessage()]);
 }
 ?>
