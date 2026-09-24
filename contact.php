@@ -121,13 +121,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         message: document.getElementById('contactMessage').value
                     };
 
-                    fetch('contact.php', {
+                    fetch('/contact', {
                         method: 'POST',
                         headers: {'Content-Type': 'application/json'},
                         body: JSON.stringify(payload)
                     })
-                    .then(res => res.json())
-                    .then(data => {
+                    .then(res => res.text())
+                    .then(text => {
+                        let data;
+                        try {
+                            data = JSON.parse(text);
+                        } catch(e) {
+                            showPopup('error', 'Server Error', 'Unexpected server response: ' + text.substring(0, 200));
+                            return;
+                        }
                         if(data.success) {
                             showPopup('success', 'Message Sent', 'Thank you for reaching out. We will get back to you shortly.');
                             document.getElementById('contactForm').reset();
@@ -136,7 +143,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         }
                     })
                     .catch(err => {
-                        showPopup('error', 'Network Error', 'Please check your connection and try again.');
+                        showPopup('error', 'Network Error', 'Could not reach the server. Please check your connection and try again.');
                     })
                     .finally(() => {
                         btn.disabled = false;

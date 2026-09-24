@@ -123,7 +123,7 @@ include 'partials/nav.php';
                                 mpesa_code: document.getElementById('newMpesaCode').value
                             };
                             
-                            fetch('resubmit.php?ref=<?= htmlspecialchars($ref) ?>', {
+                            fetch('/resubmit?ref=<?= htmlspecialchars($ref) ?>', {
                                 method: 'POST',
                                 headers: {'Content-Type': 'application/json'},
                                 body: JSON.stringify(payload)

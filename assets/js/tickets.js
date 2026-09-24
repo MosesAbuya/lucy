@@ -135,19 +135,28 @@ function submitOrder() {
         mpesa_code: mpesaCode
     };
 
-    fetch('api/order.php', {
+    fetch('/api/order.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(payload)
     })
-    .then(res => res.json())
-    .then(data => {
+    .then(res => res.text())
+    .then(text => {
+        let data;
+        try {
+            data = JSON.parse(text);
+        } catch(e) {
+            showPopup('error', 'Server Error', 'The server returned an unexpected response. Please contact support.<br><small style="opacity:0.6">' + text.substring(0, 200) + '</small>');
+            btn.disabled = false;
+            btn.innerText = 'Confirm My Order';
+            return;
+        }
         if (data.success) {
             showPopup('success', 'Order Received', 'Your reference is ' + data.order_ref + '. We will verify your M-Pesa payment shortly.');
             setTimeout(() => {
-                window.location.href = 'order-success.php?ref=' + data.order_ref;
+                window.location.href = 'order-success?ref=' + data.order_ref;
             }, 3000);
         } else {
             showPopup('error', 'Payment Error', data.error || 'An error occurred. Please try again.');
@@ -157,7 +166,7 @@ function submitOrder() {
     })
     .catch(err => {
         console.error(err);
-        showPopup('error', 'Network Error', 'Please check your connection and try again.');
+        showPopup('error', 'Network Error', 'Could not reach the server. Please check your connection and try again.');
         btn.disabled = false;
         btn.innerText = 'Confirm My Order';
     });

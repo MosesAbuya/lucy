@@ -106,7 +106,7 @@ include 'partials/nav.php';
                             details: document.getElementById('mediaDetails').value
                         };
 
-                        fetch('media.php', {
+                        fetch('/media', {
                             method: 'POST',
                             headers: {'Content-Type': 'application/json'},
                             body: JSON.stringify(payload)

@@ -164,7 +164,7 @@ include 'partials/nav.php';
                             source: 'stories'
                         };
 
-                        fetch('contact.php', {
+                        fetch('/contact', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify(payload)

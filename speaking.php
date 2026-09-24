@@ -149,7 +149,7 @@ include 'partials/nav.php';
                         source: 'speaking'
                     };
                     
-                    fetch('contact.php', {
+                    fetch('/contact', {
                         method: 'POST',
                         headers: {'Content-Type': 'application/json'},
                         body: JSON.stringify(payload)
