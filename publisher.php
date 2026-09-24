@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $extra_css = 'publisher';
 include 'partials/nav.php';
 ?>

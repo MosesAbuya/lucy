@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require_once 'admin/config.php';
 $extra_css = 'speakers';
 include 'partials/nav.php';

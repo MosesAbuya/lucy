@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $extra_css = 'kpao';
 include 'partials/nav.php';
 ?>

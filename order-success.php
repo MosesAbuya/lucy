@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $extra_css = 'order-success';
 include 'partials/nav.php';
 $ref = $_GET['ref'] ?? '';

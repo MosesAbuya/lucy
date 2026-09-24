@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $extra_css = 'virtual';
 include 'partials/nav.php';
 ?>

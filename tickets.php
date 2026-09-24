@@ -1,4 +1,4 @@
-﻿<?php 
+<?php 
 require_once 'admin/config.php';
 $db = getDB();
 $settings_res = $db->query("SELECT setting_key, setting_value FROM site_settings");
