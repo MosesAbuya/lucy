@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /partials/
+Disallow: /order-success
+Disallow: /resubmit
+Disallow: /track
+Disallow: /refund
+Disallow: /*.php$
+
+Sitemap: https://www.lucymworia.com/sitemap.xml

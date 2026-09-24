@@ -643,11 +643,7 @@ include 'partials/nav.php';
     }
 
     /* Light mode adjustments */
-    :root.light-mode .portrait-heading {
-        color: var(--color-ink);
-    }
     :root.light-mode .portrait-body {
-        color: var(--color-ink);
         opacity: 0.75;
     }
     :root.light-mode .portrait-ornament-bottom {
