@@ -3,16 +3,16 @@
 define('ADMIN_PASSWORD_HASH', password_hash('lucy2026', PASSWORD_DEFAULT)); // Simple default password
 
 //Localdb
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'lucy');
-define('DB_USER', 'root');
-define('DB_PASS', '');
+// define('DB_HOST', 'localhost');
+// define('DB_NAME', 'lucy');
+// define('DB_USER', 'root');
+// define('DB_PASS', '');
 
 //Livedb
-// define('DB_HOST', 'localhost');
-// define('DB_NAME', 'lucymwor_lucy');
-// define('DB_USER', 'lucymwor_lucy');
-// define('DB_PASS', 'Lucy@2026');
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'lucymwor_lucy');
+define('DB_USER', 'lucymwor_lucy');
+define('DB_PASS', 'Lucy@2026');
 
 define('ADMIN_EMAIL', 'info@lucymworia.com');
 define('TILL_NUMBER', '1717582');

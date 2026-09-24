@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $extra_css = 'home';
 $extra_js = 'home_interactions';
 include 'partials/nav.php';
@@ -498,15 +498,20 @@ include 'partials/nav.php';
                         <img src="assets/images/lucy/lucy closeup.jpeg" alt="Lucy Mworia" class="lucy-portrait-img">
                     </div>
                     <div class="portrait-ornament-top">✦ &nbsp; Finding Lucy &nbsp; ✦</div>
-                    <div class="portrait-ornament-bottom">Author &nbsp;·&nbsp; Advocate &nbsp;·&nbsp; Transformation</div>
+                    <div class="portrait-ornament-bottom">Author &nbsp;·&nbsp; Advocate &nbsp;·&nbsp; Transformation
+                    </div>
                 </div>
             </div>
             <!-- Text -->
             <div class="col-lg-6 offset-lg-1">
-                <div class="portrait-eyebrow">The Woman Behind The Book</div>
+                <div class="portrait-eyebrow">The Face Behind Everything</div>
                 <h2 class="portrait-heading">Meet Lucy Mworia</h2>
-                <p class="portrait-body">Lucy Mworia is a nurse, an author, and a woman who chose herself — after decades of choosing everyone else. Her story is not about the weight she shed, but the life she claimed back: the joy, the identity, the unapologetic sense of self that had quietly slipped away.</p>
-                <p class="portrait-body">Born in Kenya and shaped by two continents, Lucy brings warmth, honesty, and deep wisdom to everything she does — from the boardroom to the ballroom. <em>Finding Lucy</em> is the memoir of that journey, written so other women may recognise themselves in its pages.</p>
+                <p class="portrait-body">Lucy Mworia is a nurse, an author, and a woman who chose herself after decades
+                    of choosing everyone else. Her story is not about the weight she shed, but the life she claimed
+                    back: the joy, the identity, the unapologetic sense of self that had quietly slipped away.</p>
+                <p class="portrait-body">Born in Kenya and shaped by two continents, Lucy brings warmth, honesty, and
+                    deep wisdom to everything she does - from the boardroom to the ballroom. <em>Finding Lucy</em> is
+                    the memoir of that journey, written so other women may recognise themselves in its pages.</p>
                 <div class="mt-5">
                     <a href="author" class="btn-gold-solid">Discover Her Story</a>
                 </div>
@@ -517,8 +522,9 @@ include 'partials/nav.php';
 
 <style>
     .lucy-portrait-section {
-        background: radial-gradient(ellipse at 40% 50%, rgba(184,147,90,0.06) 0%, transparent 70%);
+        background: radial-gradient(ellipse at 40% 50%, rgba(184, 147, 90, 0.06) 0%, transparent 70%);
     }
+
     .lucy-portrait-frame {
         position: relative;
         display: inline-block;
@@ -526,25 +532,29 @@ include 'partials/nav.php';
         max-width: 400px;
         width: 100%;
     }
+
     .portrait-inner {
         position: relative;
-        border: 1px solid rgba(184,147,90,0.5);
+        border: 1px solid rgba(184, 147, 90, 0.5);
         overflow: hidden;
         clip-path: polygon(15px 0%, calc(100% - 15px) 0%, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0% calc(100% - 15px), 0% 15px);
         box-shadow:
-            0 0 0 6px rgba(184,147,90,0.08),
-            0 25px 60px rgba(0,0,0,0.45),
-            inset 0 0 40px rgba(184,147,90,0.04);
+            0 0 0 6px rgba(184, 147, 90, 0.08),
+            0 25px 60px rgba(0, 0, 0, 0.45),
+            inset 0 0 40px rgba(184, 147, 90, 0.04);
     }
+
     .lucy-portrait-img {
         width: 100%;
         display: block;
         transition: transform 0.6s ease;
         filter: contrast(1.05) brightness(0.97);
     }
+
     .lucy-portrait-frame:hover .lucy-portrait-img {
         transform: scale(1.03);
     }
+
     /* Corner ornaments */
     .portrait-corner {
         position: absolute;
@@ -554,10 +564,31 @@ include 'partials/nav.php';
         border-style: solid;
         z-index: 2;
     }
-    .portrait-corner--tl { top: 6px; left: 6px; border-width: 2px 0 0 2px; }
-    .portrait-corner--tr { top: 6px; right: 6px; border-width: 2px 2px 0 0; }
-    .portrait-corner--bl { bottom: 30px; left: 6px; border-width: 0 0 2px 2px; }
-    .portrait-corner--br { bottom: 30px; right: 6px; border-width: 0 2px 2px 0; }
+
+    .portrait-corner--tl {
+        top: 6px;
+        left: 6px;
+        border-width: 2px 0 0 2px;
+    }
+
+    .portrait-corner--tr {
+        top: 6px;
+        right: 6px;
+        border-width: 2px 2px 0 0;
+    }
+
+    .portrait-corner--bl {
+        bottom: 30px;
+        left: 6px;
+        border-width: 0 0 2px 2px;
+    }
+
+    .portrait-corner--br {
+        bottom: 30px;
+        right: 6px;
+        border-width: 0 2px 2px 0;
+    }
+
     /* Ornament text */
     .portrait-ornament-top {
         position: absolute;
@@ -572,6 +603,7 @@ include 'partials/nav.php';
         white-space: nowrap;
         opacity: 0.85;
     }
+
     .portrait-ornament-bottom {
         margin-top: 10px;
         font-family: var(--font-ui);
@@ -582,6 +614,7 @@ include 'partials/nav.php';
         text-transform: uppercase;
         opacity: 0.75;
     }
+
     /* Text side */
     .portrait-eyebrow {
         font-family: var(--font-ui);
@@ -591,6 +624,7 @@ include 'partials/nav.php';
         color: var(--color-gold);
         margin-bottom: 1rem;
     }
+
     .portrait-heading {
         font-family: var(--font-heading);
         font-size: clamp(2.4rem, 4vw, 3.4rem);
@@ -598,6 +632,7 @@ include 'partials/nav.php';
         margin-bottom: 1.8rem;
         color: var(--color-ivory);
     }
+
     .portrait-body {
         font-size: 1.05rem;
         font-weight: 300;
@@ -606,16 +641,18 @@ include 'partials/nav.php';
         margin-bottom: 1.2rem;
         color: var(--color-ivory);
     }
+
     /* Light mode adjustments */
     :root.light-mode .portrait-heading,
     :root.light-mode .portrait-body {
         color: var(--color-ink);
     }
+
     :root.light-mode .portrait-inner {
         box-shadow:
-            0 0 0 6px rgba(184,147,90,0.12),
-            0 20px 50px rgba(0,0,0,0.18),
-            inset 0 0 30px rgba(184,147,90,0.03);
+            0 0 0 6px rgba(184, 147, 90, 0.12),
+            0 20px 50px rgba(0, 0, 0, 0.18),
+            inset 0 0 30px rgba(184, 147, 90, 0.03);
     }
 </style>
 
