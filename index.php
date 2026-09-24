@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $extra_css = 'home';
 $extra_js = 'home_interactions';
 include 'partials/nav.php';
@@ -643,11 +643,16 @@ include 'partials/nav.php';
     }
 
     /* Light mode adjustments */
-    :root.light-mode .portrait-heading,
-    :root.light-mode .portrait-body {
+    :root.light-mode .portrait-heading {
         color: var(--color-ink);
     }
-
+    :root.light-mode .portrait-body {
+        color: var(--color-ink);
+        opacity: 0.75;
+    }
+    :root.light-mode .portrait-ornament-bottom {
+        opacity: 0.9;
+    }
     :root.light-mode .portrait-inner {
         box-shadow:
             0 0 0 6px rgba(184, 147, 90, 0.12),
