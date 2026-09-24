@@ -14,39 +14,39 @@ include 'partials/nav.php';
                     <div class="col-md-6">
                         <h3 style="color: var(--color-gold); font-family: var(--font-heading); margin-bottom: 1.5rem;">Explore</h3>
                         <ul class="list-unstyled" style="font-size: 1.1rem; line-height: 2;">
-                            <li><a href="index.php" style="color: #fff; text-decoration: none;">Home</a></li>
-                            <li><a href="book.php" style="color: #fff; text-decoration: none;">The Book</a></li>
-                            <li><a href="author.php" style="color: #fff; text-decoration: none;">The Author</a></li>
-                            <li><a href="kpao.php" style="color: #fff; text-decoration: none;">Kenya Pro-Ageing Organisation</a></li>
-                            <li><a href="journey.php" style="color: #fff; text-decoration: none;">Gallery / Journey</a></li>
+                            <li><a href="index" style="color: #fff; text-decoration: none;">Home</a></li>
+                            <li><a href="book" style="color: #fff; text-decoration: none;">The Book</a></li>
+                            <li><a href="author" style="color: #fff; text-decoration: none;">The Author</a></li>
+                            <li><a href="kpao" style="color: #fff; text-decoration: none;">Kenya Pro-Ageing Organisation</a></li>
+                            <li><a href="journey" style="color: #fff; text-decoration: none;">Gallery / Journey</a></li>
                         </ul>
                     </div>
                     
                     <div class="col-md-6">
                         <h3 style="color: var(--color-gold); font-family: var(--font-heading); margin-bottom: 1.5rem;">Event & Tickets</h3>
                         <ul class="list-unstyled" style="font-size: 1.1rem; line-height: 2;">
-                            <li><a href="event.php" style="color: #fff; text-decoration: none;">The Gala Dinner</a></li>
-                            <li><a href="tickets.php" style="color: #fff; text-decoration: none;">Reserve Tickets</a></li>
-                            <li><a href="track.php" style="color: #fff; text-decoration: none;">Track Your Order</a></li>
-                            <li><a href="faq.php" style="color: #fff; text-decoration: none;">Frequently Asked Questions</a></li>
+                            <li><a href="event" style="color: #fff; text-decoration: none;">The Gala Dinner</a></li>
+                            <li><a href="tickets" style="color: #fff; text-decoration: none;">Reserve Tickets</a></li>
+                            <li><a href="track" style="color: #fff; text-decoration: none;">Track Your Order</a></li>
+                            <li><a href="faq" style="color: #fff; text-decoration: none;">Frequently Asked Questions</a></li>
                         </ul>
                     </div>
                     
                     <div class="col-md-6">
                         <h3 style="color: var(--color-gold); font-family: var(--font-heading); margin-bottom: 1.5rem;">Connect</h3>
                         <ul class="list-unstyled" style="font-size: 1.1rem; line-height: 2;">
-                            <li><a href="contact.php" style="color: #fff; text-decoration: none;">General Contact</a></li>
-                            <li><a href="press.php" style="color: #fff; text-decoration: none;">Press Room</a></li>
-                            <li><a href="media.php" style="color: #fff; text-decoration: none;">Media Requests</a></li>
+                            <li><a href="contact" style="color: #fff; text-decoration: none;">General Contact</a></li>
+                            <li><a href="press" style="color: #fff; text-decoration: none;">Press Room</a></li>
+                            <li><a href="media" style="color: #fff; text-decoration: none;">Media Requests</a></li>
                         </ul>
                     </div>
 
                     <div class="col-md-6">
                         <h3 style="color: var(--color-gold); font-family: var(--font-heading); margin-bottom: 1.5rem;">Legal</h3>
                         <ul class="list-unstyled" style="font-size: 1.1rem; line-height: 2;">
-                            <li><a href="terms.php" style="color: rgba(255,255,255,0.7); text-decoration: none;">Terms of Service</a></li>
-                            <li><a href="privacy.php" style="color: rgba(255,255,255,0.7); text-decoration: none;">Privacy Policy</a></li>
-                            <li><a href="refund.php" style="color: rgba(255,255,255,0.7); text-decoration: none;">Refund Policy</a></li>
+                            <li><a href="terms" style="color: rgba(255,255,255,0.7); text-decoration: none;">Terms of Service</a></li>
+                            <li><a href="privacy" style="color: rgba(255,255,255,0.7); text-decoration: none;">Privacy Policy</a></li>
+                            <li><a href="refund" style="color: rgba(255,255,255,0.7); text-decoration: none;">Refund Policy</a></li>
                         </ul>
                     </div>
                 </div>

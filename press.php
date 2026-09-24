@@ -114,7 +114,7 @@ include 'partials/nav.php';
                     media form or email us directly.
                 </p>
                 <div class="d-flex justify-content-center gap-4">
-                    <a href="media.php" class="btn-gold-solid">Submit Media Request</a>
+                    <a href="media" class="btn-gold-solid">Submit Media Request</a>
                     <a href="mailto:info@lucymworia.com" class="btn-gold">Email Press Office</a>
                 </div>
             </div>

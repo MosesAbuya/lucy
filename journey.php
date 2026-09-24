@@ -173,7 +173,7 @@ include 'partials/nav.php';
                     uses her journey to advocate for pro-ageing through KPAO (Kenya Pro-Ageing Organisation), proving
                     that life after sixty can be vibrant, purposeful, and profoundly joyful.
                 </p>
-                <a href="book.php" class="btn-gold-solid mt-4">Read the Full Story</a>
+                <a href="book" class="btn-gold-solid mt-4">Read the Full Story</a>
             </div>
             <div class="journey-image">
                 <img src="assets/images/lucy/lucy smiling.jpg" alt="Wellness Villa">
@@ -188,7 +188,7 @@ include 'partials/nav.php';
     <div class="container">
         <h3 style="color: var(--color-gold); font-family: var(--font-heading); margin-bottom: 2rem;">Ready to take your
             own journey?</h3>
-        <a href="pledge.php" class="btn-gold px-5 py-3">Take the Pledge</a>
+        <a href="pledge" class="btn-gold px-5 py-3">Take the Pledge</a>
     </div>
 </section>
 

@@ -11,7 +11,7 @@ include 'partials/nav.php';
         <p style="opacity: 0.8; font-weight: 300; max-width: 500px; margin: 0 auto 3rem;">
             The page you are looking for seems to have gone missing. Sometimes we all get a little lost on the journey.
         </p>
-        <a href="index.php" class="btn-gold-solid">Return Home</a>
+        <a href="index" class="btn-gold-solid">Return Home</a>
     </div>
 </section>
 

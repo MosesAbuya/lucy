@@ -310,7 +310,7 @@ include 'partials/nav.php';
                         <h2 style="font-family: var(--font-heading);">Order Received</h2>
                         <p style="opacity: 0.8; font-size: 1.1rem; margin-bottom: 0.5rem;">Your reference: <strong id="successRef" style="color: var(--color-gold);"></strong></p>
                         <p style="opacity: 0.7; max-width: 500px; margin: 1rem auto 2rem;">We will verify your M-Pesa payment shortly. Once confirmed, you will receive an email with your receipt and further details.</p>
-                        <a href="index.php" class="btn-gold mt-4">Return Home</a>
+                        <a href="index" class="btn-gold mt-4">Return Home</a>
                     </div>
                 </div>
 

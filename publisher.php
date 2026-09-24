@@ -45,7 +45,7 @@ include 'partials/nav.php';
                 </div>
                 
                 <div class="text-center mt-5">
-                    <a href="book.php" class="btn-gold-solid">Explore the Book</a>
+                    <a href="book" class="btn-gold-solid">Explore the Book</a>
                 </div>
             </div>
         </div>

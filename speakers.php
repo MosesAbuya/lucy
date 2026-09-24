@@ -47,8 +47,8 @@ $speakers = $speakers_res ? $speakers_res->fetch_all(MYSQLI_ASSOC) : [];
 
         <div class="row mt-5 pt-5 text-center">
             <div class="col-12">
-                <a href="event.php" class="btn-gold">View Event Details</a>
-                <a href="tickets.php" class="btn-gold-solid ms-3">Reserve Seat</a>
+                <a href="event" class="btn-gold">View Event Details</a>
+                <a href="tickets" class="btn-gold-solid ms-3">Reserve Seat</a>
             </div>
         </div>
     </div>

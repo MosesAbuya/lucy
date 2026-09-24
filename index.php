@@ -424,7 +424,7 @@ include 'partials/nav.php';
         <div
             style="background: var(--color-gold); color: var(--color-ink); text-align: center; padding: 0.6rem 1rem; font-family: var(--font-ui); font-size: 0.8rem; letter-spacing: 0.08em; font-weight: 600; text-transform: uppercase; margin: 0 auto 3rem; border-radius: 4px; max-width: 600px;">
             <i class="fas fa-book-open" style="margin-right: 8px;"></i> Finding Lucy is here - KES 2,500 &nbsp;·&nbsp;
-            <a href="tickets.php" style="color: var(--color-ink); text-decoration: underline;">Order your copy →</a>
+            <a href="tickets" style="color: var(--color-ink); text-decoration: underline;">Order your copy →</a>
         </div>
 
         <div class="d-flex align-items-center justify-content-center mb-5" style="opacity: 0.7;">
@@ -475,8 +475,8 @@ include 'partials/nav.php';
                     after a lifetime of showing up for everyone else, finally chose herself. This is that story.
                 </p>
                 <div class="d-flex justify-content-center flex-wrap gap-4 mb-5">
-                    <a href="tickets.php" class="btn-gold-solid">Reserve Gala Seat</a>
-                    <a href="book.php" class="btn-gold">Explore The Book</a>
+                    <a href="tickets" class="btn-gold-solid">Reserve Gala Seat</a>
+                    <a href="book" class="btn-gold">Explore The Book</a>
                 </div>
             </div>
         </div>
@@ -539,7 +539,7 @@ include 'partials/nav.php';
         </div>
 
         <div class="text-center mt-5">
-            <a href="journey.php" class="btn-gold">Discover Her Journey</a>
+            <a href="journey" class="btn-gold">Discover Her Journey</a>
         </div>
     </div>
 </section>
@@ -577,7 +577,7 @@ include 'partials/nav.php';
         <div class="text-center mt-5 pt-4">
             <p style="font-size: 1.2rem; font-style: italic; opacity: 0.9;">"The number on the scale was never the real
                 story."</p>
-            <a href="author.php" class="btn-gold mt-3">Meet Lucy</a>
+            <a href="author" class="btn-gold mt-3">Meet Lucy</a>
         </div>
     </div>
 </section>
@@ -690,7 +690,7 @@ include 'partials/nav.php';
             Thousands of women are carrying weight that no scale can measure. This is your invitation to put yourself
             back on your own list.
         </p>
-        <a href="pledge.php" class="btn-gold-solid px-5 py-3" style="font-size: 1.1rem;">Take the Pledge</a>
+        <a href="pledge" class="btn-gold-solid px-5 py-3" style="font-size: 1.1rem;">Take the Pledge</a>
     </div>
 </section>
 

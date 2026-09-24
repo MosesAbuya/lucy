@@ -33,7 +33,7 @@ include 'partials/nav.php';
                         Virtual access details and streaming links will be available closer to the launch date (October 6th). Subscribers will be notified via email when virtual tickets go live.
                     </p>
                     
-                    <a href="tickets.php" class="btn-gold-solid">View Physical Tickets</a>
+                    <a href="tickets" class="btn-gold-solid">View Physical Tickets</a>
                 </div>
             </div>
         </div>
