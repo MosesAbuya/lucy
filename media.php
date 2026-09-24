@@ -1,7 +1,5 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    header('Content-Type: application/json');
-    
     $data = json_decode(file_get_contents('php://input'), true);
     if (!$data) $data = $_POST;
     
@@ -11,59 +9,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $request_type = trim($data['request_type'] ?? '');
     $details = trim($data['details'] ?? '');
     
-    if (!$name || !$outlet || !$email || !$details) {
-        echo json_encode(['success' => false, 'error' => 'Please fill in all required fields.']);
-        exit;
-    }
-    
-    $subject = "Media Request: $outlet - $request_type";
-    $plain_body = "Name: $name\nOutlet: $outlet\nEmail: $email\nType: $request_type\n\n$details";
-    
-    // STEP 1: Save to DB
-    try {
+    if ($name && $outlet && $email && $details) {
         require_once 'admin/config.php';
-        $db = getDB();
-        $stmt = $db->prepare("INSERT INTO contact_messages (name, email, subject, message, source) VALUES (?, ?, ?, ?, 'media')");
-        if (!$stmt) {
-            echo json_encode(['success' => false, 'error' => 'DB error: ' . $db->error]);
-            exit;
-        }
-        $stmt->bind_param("ssss", $name, $email, $subject, $plain_body);
-        $stmt->execute();
-        $stmt->close();
-        $db->close();
-    } catch (Throwable $e) {
-        echo json_encode(['success' => false, 'error' => 'Database error: ' . $e->getMessage()]);
-        exit;
-    }
-    
-    // STEP 2: Return success and close connection
-    $response = json_encode(['success' => true]);
-    header('Content-Length: ' . strlen($response));
-    header('Connection: close');
-    echo $response;
-    if (ob_get_level() > 0) ob_end_flush();
-    flush();
-    if (function_exists('fastcgi_finish_request')) {
-        fastcgi_finish_request();
-    }
-    ob_start();
-    
-    // STEP 3: Try email silently
-    try {
         require_once 'partials/mailer.php';
-        $html_body = "New media request received via the website.<br><br>"
+        
+        $subject = "Media Request: $outlet - $request_type";
+        $body = "New media request received via the website.<br><br>"
               . "<strong>Name:</strong> $name<br>"
               . "<strong>Outlet/Publication:</strong> $outlet<br>"
               . "<strong>Email:</strong> $email<br>"
               . "<strong>Type:</strong> $request_type<br><br>"
               . "<strong>Details:</strong><br>" . nl2br(htmlspecialchars($details));
-        sendMail(ADMIN_EMAIL, $subject, $html_body, true, 'Media Request');
-    } catch (Throwable $e) {
-        error_log("Media email failed: " . $e->getMessage());
+              
+        $db = getDB();
+        $stmt = $db->prepare("INSERT INTO contact_messages (name, email, subject, message, source) VALUES (?, ?, ?, ?, 'media')");
+        // Store plain text in DB, so strip tags for DB:
+        $plain_body = strip_tags(str_replace('<br>', "\n", $body));
+        $stmt->bind_param("ssss", $name, $email, $subject, $plain_body);
+        $stmt->execute();
+        $stmt->close();
+              
+        if (sendMail(ADMIN_EMAIL, $subject, $body, true, 'Media Request')) {
+            header('Content-Type: application/json');
+            echo json_encode(['success' => true]);
+            exit;
+        } else {
+            header('Content-Type: application/json');
+            echo json_encode(['success' => false, 'error' => 'Failed to send email via SMTP.']);
+            exit;
+        }
+    } else {
+        header('Content-Type: application/json');
+        echo json_encode(['success' => false, 'error' => 'Please fill in all required fields.']);
+        exit;
     }
-    
-    exit;
 }
 $extra_css = 'media';
 include 'partials/nav.php';

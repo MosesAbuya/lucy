@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // Shared Header / Nav Partial
 ?>
 <!DOCTYPE html>
@@ -75,7 +75,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top hairline-bottom" style="background-color: var(--color-ink-translucent); backdrop-filter: blur(10px); transition: background-color var(--transition-slow);">
         <div class="container">
             <!-- Removed the slash/thread icon before text as requested -->
-            <a class="navbar-brand" href="index" style="font-family: var(--font-heading); font-size: 1.5rem; letter-spacing: 0.05em; color: var(--color-gold);">
+            <a class="navbar-brand" href="/lucy/" style="font-family: var(--font-heading); font-size: 1.5rem; letter-spacing: 0.05em; color: var(--color-gold);">
                 Lucy Mworia
             </a>
             

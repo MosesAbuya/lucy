@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Tickets Booking Flow Logic - Manual Till
  */
 
@@ -135,32 +135,19 @@ function submitOrder() {
         mpesa_code: mpesaCode
     };
 
-    fetch('/api/order', {
+    fetch('api/order.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(payload)
     })
-    .then(res => res.text())
-    .then(text => {
-        console.log('Server response:', text); // Debug: see full response
-        let data;
-        try {
-            data = JSON.parse(text);
-        } catch(e) {
-            // Escape HTML so it displays as text, not rendered
-            const escaped = text.substring(0, 500)
-                .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-            showPopup('error', 'Server Error', '<pre style="text-align:left;font-size:0.7rem;overflow:auto;max-height:150px;opacity:0.8">' + (escaped || '(empty response)') + '</pre>');
-            btn.disabled = false;
-            btn.innerText = 'Confirm My Order';
-            return;
-        }
+    .then(res => res.json())
+    .then(data => {
         if (data.success) {
             showPopup('success', 'Order Received', 'Your reference is ' + data.order_ref + '. We will verify your M-Pesa payment shortly.');
             setTimeout(() => {
-                window.location.href = 'order-success?ref=' + data.order_ref;
+                window.location.href = 'order-success.php?ref=' + data.order_ref;
             }, 3000);
         } else {
             showPopup('error', 'Payment Error', data.error || 'An error occurred. Please try again.');
@@ -170,7 +157,7 @@ function submitOrder() {
     })
     .catch(err => {
         console.error(err);
-        showPopup('error', 'Network Error', 'Could not reach the server. Please check your connection and try again.');
+        showPopup('error', 'Network Error', 'Please check your connection and try again.');
         btn.disabled = false;
         btn.innerText = 'Confirm My Order';
     });

@@ -1,7 +1,5 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    header('Content-Type: application/json');
-    
     $data = json_decode(file_get_contents('php://input'), true);
     if (!$data) $data = $_POST;
     
@@ -11,51 +9,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $subject = trim($data['subject'] ?? 'General Inquiry');
     $source = trim($data['source'] ?? 'contact');
     
-    if (empty($name) || empty($email) || empty($message)) {
-        echo json_encode(['success' => false, 'error' => 'Please fill in all fields.']);
-        exit;
-    }
-    
-    // STEP 1: Save to DB first
-    try {
+    if(!empty($name) && !empty($email) && !empty($message)) {
         require_once 'admin/config.php';
+        require_once 'partials/mailer.php';
+        
         $db = getDB();
         $stmt = $db->prepare("INSERT INTO contact_messages (name, email, subject, message, source) VALUES (?, ?, ?, ?, ?)");
-        if (!$stmt) {
-            echo json_encode(['success' => false, 'error' => 'DB error: ' . $db->error]);
-            exit;
-        }
         $stmt->bind_param("sssss", $name, $email, $subject, $message, $source);
         $stmt->execute();
         $stmt->close();
-        $db->close();
-    } catch (Throwable $e) {
-        echo json_encode(['success' => false, 'error' => 'Database error: ' . $e->getMessage()]);
-        exit;
-    }
-    
-    // STEP 2: Return success and close connection
-    $response = json_encode(['success' => true]);
-    header('Content-Length: ' . strlen($response));
-    header('Connection: close');
-    echo $response;
-    if (ob_get_level() > 0) ob_end_flush();
-    flush();
-    if (function_exists('fastcgi_finish_request')) {
-        fastcgi_finish_request();
-    }
-    ob_start();
-    
-    // STEP 3: Try email silently (won't break the response)
-    try {
-        require_once 'partials/mailer.php';
+        
         $body = "New message from $name ($email):<br><br><strong>Subject:</strong> $subject<br><br>" . nl2br(htmlspecialchars($message));
         sendMail(ADMIN_EMAIL, "Website: $subject", $body, true, 'New Enquiry');
-    } catch (Throwable $e) {
-        error_log("Contact email failed: " . $e->getMessage());
+        
+        header('Content-Type: application/json');
+        echo json_encode(['success' => true]);
+        exit;
+    } else {
+        header('Content-Type: application/json');
+        echo json_encode(['success' => false, 'error' => 'Please fill in all fields.']);
+        exit;
     }
-    
-    exit;
 }
 ?>
 <?php include 'partials/nav.php'; ?>
@@ -138,23 +112,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         message: document.getElementById('contactMessage').value
                     };
 
-                    fetch('/contact', {
+                    fetch('contact.php', {
                         method: 'POST',
                         headers: {'Content-Type': 'application/json'},
                         body: JSON.stringify(payload)
                     })
-                    .then(res => res.text())
-                    .then(text => {
-                        console.log('Server response:', text); // Debug
-                        let data;
-                        try {
-                            data = JSON.parse(text);
-                        } catch(e) {
-                            const escaped = text.substring(0, 500)
-                                .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-                            showPopup('error', 'Server Error', '<pre style="text-align:left;font-size:0.7rem;overflow:auto;max-height:150px;opacity:0.8">' + (escaped || '(empty response)') + '</pre>');
-                            return;
-                        }
+                    .then(res => res.json())
+                    .then(data => {
                         if(data.success) {
                             showPopup('success', 'Message Sent', 'Thank you for reaching out. We will get back to you shortly.');
                             document.getElementById('contactForm').reset();
@@ -163,7 +127,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         }
                     })
                     .catch(err => {
-                        showPopup('error', 'Network Error', 'Could not reach the server. Please check your connection and try again.');
+                        showPopup('error', 'Network Error', 'Please check your connection and try again.');
                     })
                     .finally(() => {
                         btn.disabled = false;

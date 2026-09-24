@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $extra_css = 'sitemap';
 include 'partials/nav.php';
 ?>
@@ -14,7 +14,7 @@ include 'partials/nav.php';
                     <div class="col-md-6">
                         <h3 style="color: var(--color-gold); font-family: var(--font-heading); margin-bottom: 1.5rem;">Explore</h3>
                         <ul class="list-unstyled" style="font-size: 1.1rem; line-height: 2;">
-                            <li><a href="index" style="color: #fff; text-decoration: none;">Home</a></li>
+                            <li><a href="/lucy/" style="color: #fff; text-decoration: none;">Home</a></li>
                             <li><a href="book" style="color: #fff; text-decoration: none;">The Book</a></li>
                             <li><a href="author" style="color: #fff; text-decoration: none;">The Author</a></li>
                             <li><a href="kpao" style="color: #fff; text-decoration: none;">Kenya Pro-Ageing Organisation</a></li>

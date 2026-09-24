@@ -169,13 +169,8 @@ include 'partials/nav.php';
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify(payload)
                         })
-                            .then(res => res.text())
-                            .then(text => {
-                                let data;
-                                try { data = JSON.parse(text); } catch(e) {
-                                    showPopup('error', 'Server Error', 'Something went wrong. Your story may still have been saved.');
-                                    return;
-                                }
+                            .then(res => res.json())
+                            .then(data => {
                                 if (data.success) {
                                     showPopup('success', 'Story Received', 'Thank you for sharing your journey with us.');
                                     document.getElementById('storyForm').reset();
