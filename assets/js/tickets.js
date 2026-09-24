@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Tickets Booking Flow Logic - Manual Till
  */
 
@@ -135,7 +135,7 @@ function submitOrder() {
         mpesa_code: mpesaCode
     };
 
-    fetch('/api/order.php', {
+    fetch('/api/order', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

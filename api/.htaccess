@@ -1,0 +1,3 @@
+# API directory - serve .php files directly, no redirect stripping
+Options -MultiViews
+RewriteEngine Off

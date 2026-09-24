@@ -763,7 +763,7 @@ include 'partials/nav.php';
                         const payload = new FormData();
                         payload.append('email', document.getElementById('subscribeEmail').value);
 
-                        fetch('/api/subscribe.php', {
+                        fetch('/api/subscribe', {
                             method: 'POST',
                             body: payload
                         })
