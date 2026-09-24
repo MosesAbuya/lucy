@@ -1,6 +1,9 @@
 Options +FollowSymLinks -MultiViews
 RewriteEngine On
-RewriteBase /
+RewriteBase /lucy/
+
+# Redirect plural events to singular event
+RewriteRule ^events/?$ event [R=301,L]
 
 # Serve real files and directories directly
 RewriteCond %{REQUEST_FILENAME} !-f
@@ -9,4 +12,4 @@ RewriteCond %{REQUEST_FILENAME} !-d
 # If the URL has no extension, internally serve the .php file
 RewriteRule ^([^.]+)$ $1.php [L]
 
-ErrorDocument 404 /404.php
+ErrorDocument 404 /lucy/404.php
