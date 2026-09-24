@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require_once 'admin/config.php';
 $extra_css = 'resubmit';
 
@@ -17,41 +17,64 @@ if ($ref) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $order) {
+    header('Content-Type: application/json');
+    
     $data = json_decode(file_get_contents('php://input'), true);
     if (!$data) $data = $_POST;
     
     if ($order['status'] !== 'pending') {
-        header('Content-Type: application/json');
         echo json_encode(['success' => false, 'error' => 'This order has already been confirmed and cannot be updated.']);
         exit;
-    } else {
-        $new_code = strtoupper(trim($data['mpesa_code'] ?? ''));
-        if (empty($new_code)) {
-            header('Content-Type: application/json');
-            echo json_encode(['success' => false, 'error' => 'Please enter a valid M-Pesa transaction code.']);
-            exit;
-        } else {
-            $stmt = $db->prepare("UPDATE orders SET mpesa_code = ? WHERE id = ?");
-            $stmt->bind_param("si", $new_code, $order['id']);
-            if ($stmt->execute()) {
-                // Notify admin again
-                require_once 'partials/mailer.php';
-                $adminBody = "Order $ref has been updated by the customer.<br><br>"
-                           . "<strong>New M-Pesa Code:</strong> $new_code<br><br>"
-                           . "Please verify and confirm in the admin dashboard.";
-                sendMail(ADMIN_EMAIL, "Order Updated - $ref", $adminBody, true, 'Order Updated');
-                
-                header('Content-Type: application/json');
-                echo json_encode(['success' => true]);
-                exit;
-            } else {
-                header('Content-Type: application/json');
-                echo json_encode(['success' => false, 'error' => 'Failed to update. Please try again.']);
-                exit;
-            }
-            $stmt->close();
-        }
     }
+    
+    $new_code = strtoupper(trim($data['mpesa_code'] ?? ''));
+    if (empty($new_code)) {
+        echo json_encode(['success' => false, 'error' => 'Please enter a valid M-Pesa transaction code.']);
+        exit;
+    }
+    
+    // STEP 1: Update DB
+    try {
+        $stmt = $db->prepare("UPDATE orders SET mpesa_code = ? WHERE id = ?");
+        if (!$stmt) {
+            echo json_encode(['success' => false, 'error' => 'DB error: ' . $db->error]);
+            exit;
+        }
+        $stmt->bind_param("si", $new_code, $order['id']);
+        if (!$stmt->execute()) {
+            echo json_encode(['success' => false, 'error' => 'Failed to update. Please try again.']);
+            exit;
+        }
+        $stmt->close();
+    } catch (Throwable $e) {
+        echo json_encode(['success' => false, 'error' => 'Database error: ' . $e->getMessage()]);
+        exit;
+    }
+    
+    // STEP 2: Return success and close connection
+    $response = json_encode(['success' => true]);
+    header('Content-Length: ' . strlen($response));
+    header('Connection: close');
+    echo $response;
+    if (ob_get_level() > 0) ob_end_flush();
+    flush();
+    if (function_exists('fastcgi_finish_request')) {
+        fastcgi_finish_request();
+    }
+    ob_start();
+    
+    // STEP 3: Try email silently
+    try {
+        require_once 'partials/mailer.php';
+        $adminBody = "Order $ref has been updated by the customer.<br><br>"
+                   . "<strong>New M-Pesa Code:</strong> $new_code<br><br>"
+                   . "Please verify and confirm in the admin dashboard.";
+        sendMail(ADMIN_EMAIL, "Order Updated - $ref", $adminBody, true, 'Order Updated');
+    } catch (Throwable $e) {
+        error_log("Resubmit email failed: " . $e->getMessage());
+    }
+    
+    exit;
 }
 
 include 'partials/nav.php';

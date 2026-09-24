@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $extra_css = 'speaking';
 include 'partials/nav.php';
 ?>
@@ -154,8 +154,13 @@ include 'partials/nav.php';
                         headers: {'Content-Type': 'application/json'},
                         body: JSON.stringify(payload)
                     })
-                    .then(res => res.json())
-                    .then(data => {
+                    .then(res => res.text())
+                    .then(text => {
+                        let data;
+                        try { data = JSON.parse(text); } catch(e) {
+                            showPopup('error', 'Server Error', 'Something went wrong. Your request may still have been saved.');
+                            return;
+                        }
                         if(data.success) {
                             showPopup('success', 'Request Sent', 'Thank you. Our team will be in touch shortly.');
                             document.getElementById('speakingForm').reset();

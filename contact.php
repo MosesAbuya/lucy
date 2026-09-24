@@ -1,44 +1,61 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    error_reporting(0);
-    try {
-        $data = json_decode(file_get_contents('php://input'), true);
-        if (!$data) $data = $_POST;
-        
-        $name = trim($data['name'] ?? '');
-        $email = trim($data['email'] ?? '');
-        $message = trim($data['message'] ?? '');
-        $subject = trim($data['subject'] ?? 'General Inquiry');
-        $source = trim($data['source'] ?? 'contact');
-        
-        if(!empty($name) && !empty($email) && !empty($message)) {
-            require_once 'admin/config.php';
-            require_once 'partials/mailer.php';
-            
-            $db = getDB();
-            $stmt = $db->prepare("INSERT INTO contact_messages (name, email, subject, message, source) VALUES (?, ?, ?, ?, ?)");
-            if (!$stmt) throw new Exception("DB Error: " . $db->error);
-            
-            $stmt->bind_param("sssss", $name, $email, $subject, $message, $source);
-            $stmt->execute();
-            $stmt->close();
-            
-            $body = "New message from $name ($email):<br><br><strong>Subject:</strong> $subject<br><br>" . nl2br(htmlspecialchars($message));
-            sendMail(ADMIN_EMAIL, "Website: $subject", $body, true, 'New Enquiry');
-            
-            header('Content-Type: application/json');
-            echo json_encode(['success' => true]);
-            exit;
-        } else {
-            header('Content-Type: application/json');
-            echo json_encode(['success' => false, 'error' => 'Please fill in all fields.']);
-            exit;
-        }
-    } catch (Throwable $e) {
-        header('Content-Type: application/json');
-        echo json_encode(['success' => false, 'error' => 'Server Error: ' . $e->getMessage()]);
+    header('Content-Type: application/json');
+    
+    $data = json_decode(file_get_contents('php://input'), true);
+    if (!$data) $data = $_POST;
+    
+    $name = trim($data['name'] ?? '');
+    $email = trim($data['email'] ?? '');
+    $message = trim($data['message'] ?? '');
+    $subject = trim($data['subject'] ?? 'General Inquiry');
+    $source = trim($data['source'] ?? 'contact');
+    
+    if (empty($name) || empty($email) || empty($message)) {
+        echo json_encode(['success' => false, 'error' => 'Please fill in all fields.']);
         exit;
     }
+    
+    // STEP 1: Save to DB first
+    try {
+        require_once 'admin/config.php';
+        $db = getDB();
+        $stmt = $db->prepare("INSERT INTO contact_messages (name, email, subject, message, source) VALUES (?, ?, ?, ?, ?)");
+        if (!$stmt) {
+            echo json_encode(['success' => false, 'error' => 'DB error: ' . $db->error]);
+            exit;
+        }
+        $stmt->bind_param("sssss", $name, $email, $subject, $message, $source);
+        $stmt->execute();
+        $stmt->close();
+        $db->close();
+    } catch (Throwable $e) {
+        echo json_encode(['success' => false, 'error' => 'Database error: ' . $e->getMessage()]);
+        exit;
+    }
+    
+    // STEP 2: Return success and close connection
+    $response = json_encode(['success' => true]);
+    header('Content-Length: ' . strlen($response));
+    header('Connection: close');
+    echo $response;
+    if (ob_get_level() > 0) ob_end_flush();
+    flush();
+    if (function_exists('fastcgi_finish_request')) {
+        fastcgi_finish_request();
+    }
+    ob_start();
+    
+    // STEP 3: Try email silently (won't break the response)
+    try {
+        require_once 'partials/mailer.php';
+        $body = "New message from $name ($email):<br><br><strong>Subject:</strong> $subject<br><br>" . nl2br(htmlspecialchars($message));
+        sendMail(ADMIN_EMAIL, "Website: $subject", $body, true, 'New Enquiry');
+    } catch (Throwable $e) {
+        error_log("Contact email failed: " . $e->getMessage());
+    }
+    
+    exit;
 }
 ?>
 <?php include 'partials/nav.php'; ?>
