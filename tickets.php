@@ -186,11 +186,11 @@ include 'partials/nav.php';
                         </div>
                         <div class="col-md-4">
                             <div class="ticket-card" data-tier="ticket" data-price="3500" onclick="selectTicket(this)">
-                                <div class="ticket-tier">Gala Ticket</div>
+                                <div class="ticket-tier">Event Ticket</div>
                                 <div class="ticket-price">KES 3,500</div>
                                 <ul class="ticket-includes ps-3">
-                                    <li>Entry to the gala event</li>
-                                    <li>Gala dinner & Q&A</li>
+                                    <li>Entry to the launch event</li>
+                                    <li>Book Launch Soiree & Q&A</li>
                                 </ul>
                                 <div class="mt-auto text-gold text-uppercase" style="font-size: 0.8rem; letter-spacing: 0.1em;">Select</div>
                             </div>
@@ -200,7 +200,7 @@ include 'partials/nav.php';
                                 <div class="ticket-tier">Book + Ticket</div>
                                 <div class="ticket-price">KES 6,000</div>
                                 <ul class="ticket-includes ps-3">
-                                    <li>Gala entry & dinner</li>
+                                    <li>event entry & soiree</li>
                                     <li class="text-gold">Signed copy of the memoir</li>
                                 </ul>
                                 <div class="mt-auto text-gold text-uppercase" style="font-size: 0.8rem; letter-spacing: 0.1em;">Select</div>

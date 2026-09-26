@@ -15,10 +15,10 @@
                     <p>By accessing lucymworia.com and purchasing tickets or books through our manual M-Pesa till system, you agree to these Terms of Service. These terms constitute a legally binding agreement.</p>
                     
                     <h4 class="mt-5 mb-3" style="color: var(--color-gold);">2. Purchases and Payments</h4>
-                    <p>All payments for "Finding Lucy" books and Gala Dinner tickets are processed manually via M-Pesa Till Number 1717582. Orders remain in a "Pending" state until the transaction code is manually verified by our team. You must provide a valid transaction code. Fraudulent transaction codes will result in order cancellation and may be reported to relevant authorities.</p>
+                    <p>All payments for "Finding Lucy" books and Book Launch Soiree tickets are processed manually via M-Pesa Till Number 1717582. Orders remain in a "Pending" state until the transaction code is manually verified by our team. You must provide a valid transaction code. Fraudulent transaction codes will result in order cancellation and may be reported to relevant authorities.</p>
                     
                     <h4 class="mt-5 mb-3" style="color: var(--color-gold);">3. Event Attendance</h4>
-                    <p>Gala Dinner tickets grant entry to the specified individual. We reserve the right to refuse entry if the ticket cannot be verified. Attendees must adhere to the venue's rules and the stipulated dress code (Formal / Evening Wear).</p>
+                    <p>Book Launch Soiree tickets grant entry to the specified individual. We reserve the right to refuse entry if the ticket cannot be verified. Attendees must adhere to the venue's rules and the stipulated dress code (A Touch of Gold).</p>
                     
                     <h4 class="mt-5 mb-3" style="color: var(--color-gold);">4. Delivery of Physical Books</h4>
                     <p>For orders within Nairobi requesting delivery (KES 300 fee), delivery will be scheduled once the book officially launches. We are not liable for delays caused by third-party courier services or incorrect delivery addresses provided during checkout.</p>

@@ -475,7 +475,7 @@ include 'partials/nav.php';
                     after a lifetime of showing up for everyone else, finally chose herself. This is that story.
                 </p>
                 <div class="d-flex justify-content-center flex-wrap gap-4 mb-5">
-                    <a href="tickets" class="btn-gold-solid">Reserve Gala Seat</a>
+                    <a href="tickets" class="btn-gold-solid">Reserve Your Seat</a>
                     <a href="book" class="btn-gold">Explore The Book</a>
                 </div>
             </div>

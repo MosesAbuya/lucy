@@ -14,7 +14,7 @@ include 'partials/nav.php';
     <div class="container">
         <span class="eyebrow mb-3 d-block">Global Access</span>
         <h1 style="font-family: var(--font-heading); font-size: clamp(3rem, 5vw, 4.5rem); margin-bottom: 1.5rem;">
-            Virtual Gala Ticket
+            Virtual Event Ticket
         </h1>
         <p class="lead mx-auto" style="font-weight: 300; opacity: 0.9; max-width: 600px;">
             Join the <em>Finding Lucy</em> launch event from anywhere in the world.

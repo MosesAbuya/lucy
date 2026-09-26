@@ -157,7 +157,7 @@ include 'partials/nav.php';
             $display_date = date('d F Y', strtotime($settings['event_date'] ?? '2026-10-06'));
         ?>
         <span class="eyebrow mb-3"><?= $display_date ?></span>
-        <h1 style="font-family: var(--font-heading); font-size: clamp(3rem, 6vw, 5rem); margin-bottom: 1rem;">The Gala Dinner</h1>
+        <h1 style="font-family: var(--font-heading); font-size: clamp(3rem, 6vw, 5rem); margin-bottom: 1rem;">The Book Launch Soiree</h1>
         <p class="lead mx-auto" style="max-width: 600px; opacity: 0.8; font-weight: 300;">
             Join Lucy Mworia for an evening of reflection, celebration, and purpose as we officially launch <em>Finding Lucy: A Journey of Wellness, Self-Discovery and Transformation.</em>
         </p>
@@ -190,7 +190,7 @@ include 'partials/nav.php';
                         </div>
                         <div class="col-md-6">
                             <span class="detail-label">Dress Code</span>
-                            <div class="detail-value" style="font-size: 1.4rem; margin-bottom: 0;"><?= htmlspecialchars($settings['event_dress_code'] ?? 'Formal / Evening Wear') ?></div>
+                            <div class="detail-value" style="font-size: 1.4rem; margin-bottom: 0;"><?= htmlspecialchars($settings['event_dress_code'] ?? 'A Touch of Gold') ?></div>
                         </div>
                     </div>
                 </div>
@@ -254,7 +254,7 @@ include 'partials/nav.php';
                     </div>
                     <div class="agenda-item">
                         <div class="agenda-time" style="<?= count($speakers) > 0 ? 'color: var(--color-gold);' : 'color: var(--color-ink);' ?> opacity: 0.7;">To be announced</div>
-                        <div class="agenda-desc" style="<?= count($speakers) > 0 ? 'color: var(--color-ivory);' : 'color: var(--color-ink);' ?>">Gala Dinner</div>
+                        <div class="agenda-desc" style="<?= count($speakers) > 0 ? 'color: var(--color-ivory);' : 'color: var(--color-ink);' ?>">Book Launch Soiree</div>
                     </div>
                     <div class="agenda-item">
                         <div class="agenda-time" style="<?= count($speakers) > 0 ? 'color: var(--color-gold);' : 'color: var(--color-ink);' ?> opacity: 0.7;">To be announced</div>

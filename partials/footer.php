@@ -55,7 +55,7 @@
                 <div class="col-lg-2 col-md-6 col-6">
                     <h5 class="eyebrow">Event & Press</h5>
                     <ul class="list-unstyled" style="font-size: 0.9rem;">
-                        <li class="mb-2"><a href="event" style="color: inherit; opacity: 0.7;">Gala Dinner</a></li>
+                        <li class="mb-2"><a href="event" style="color: inherit; opacity: 0.7;">Book Launch Soiree</a></li>
                         <li class="mb-2"><a href="tickets" style="color: inherit; opacity: 0.7;">Buy Tickets</a></li>
                         <li class="mb-2"><a href="virtual-ticket" style="color: inherit; opacity: 0.7;">Virtual Access</a></li>
                         <li class="mb-2"><a href="speaking" style="color: inherit; opacity: 0.7;">Speaking Booking</a></li>

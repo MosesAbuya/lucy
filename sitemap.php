@@ -25,7 +25,7 @@ include 'partials/nav.php';
                     <div class="col-md-6">
                         <h3 style="color: var(--color-gold); font-family: var(--font-heading); margin-bottom: 1.5rem;">Event & Tickets</h3>
                         <ul class="list-unstyled" style="font-size: 1.1rem; line-height: 2;">
-                            <li><a href="event" style="color: #fff; text-decoration: none;">The Gala Dinner</a></li>
+                            <li><a href="event" style="color: #fff; text-decoration: none;">The Book Launch Soiree</a></li>
                             <li><a href="tickets" style="color: #fff; text-decoration: none;">Reserve Tickets</a></li>
                             <li><a href="track" style="color: #fff; text-decoration: none;">Track Your Order</a></li>
                             <li><a href="faq" style="color: #fff; text-decoration: none;">Frequently Asked Questions</a></li>

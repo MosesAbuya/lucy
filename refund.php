@@ -11,8 +11,8 @@
                 <div style="opacity: 0.9; font-weight: 300; line-height: 1.8;">
                     <p><em>Last Updated: September 2026</em></p>
                     
-                    <h4 class="mt-5 mb-3" style="color: var(--color-gold);">1. Gala Dinner Tickets</h4>
-                    <p>Tickets to the "Finding Lucy" Gala Dinner are generally non-refundable. However, if you are unable to attend, you may transfer your ticket to another individual by notifying us via email (<a href="mailto:info@lucymworia.com" style="color: var(--color-gold);">info@lucymworia.com</a>) at least 48 hours before the event date.</p>
+                    <h4 class="mt-5 mb-3" style="color: var(--color-gold);">1. Book Launch Soiree Tickets</h4>
+                    <p>Tickets to the "Finding Lucy" Book Launch Soiree are generally non-refundable. However, if you are unable to attend, you may transfer your ticket to another individual by notifying us via email (<a href="mailto:info@lucymworia.com" style="color: var(--color-gold);">info@lucymworia.com</a>) at least 48 hours before the event date.</p>
                     <p>If the event is cancelled or postponed by the organizers, you will be offered the choice of a full refund or a ticket to the rescheduled date.</p>
                     
                     <h4 class="mt-5 mb-3" style="color: var(--color-gold);">2. Physical Books</h4>
